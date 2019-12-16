@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 16:16:55 by wrhett            #+#    #+#             */
-/*   Updated: 2019/12/12 16:49:32 by wrhett           ###   ########.fr       */
+/*   Updated: 2019/12/16 18:19:08 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	ft_drawing_line(t_fdf *p)
 	while (n <= step)
 	{
 		color = ft_get_color(p->color1, p->color2, step, n);
-		if ((int)p->x1 <= WIDHT && (int)p->x1 >= 0 \
-			&& (int)p->y1 <= WIDHT && (int)p->y1 >= 0)
+		if ((int)p->x1 >= 0 && (int)p->x1 <= (WIDHT - 1) \
+			&& (int)p->y1 >= 0 && (int)p->y1 <= (HIGHT - 1))
 			p->draw[(int)p->x1 + (int)p->y1 * WIDHT] = color;
 		p->x1 = p->x1 + deltax;
 		p->y1 = p->y1 + deltay;
@@ -118,10 +118,12 @@ void	ft_drawing_iso(t_fdf *p)
 	double	y0;
 	int		n;
 
+	// x0 = p->x0 + (WIDHT - (p->width + p->hight - 2) * p->shift * cos(p->angle)) / 2;
+	// y0 = p->y0 + HIGHT - p->hight* p->shift * sin(p->angle);
 	x0 = p->x0;
 	y0 = p->y0;
 	ft_bzero(p->draw, WIDHT * HIGHT * 4);
-	ft_drawing_fon(p);
+	// ft_drawing_fon(p);
 	ft_drawing_width_line(p, x0, y0);
 	ft_drawing_hight_line(p, x0, y0);
 	mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 0, 0);

@@ -12,7 +12,7 @@ void			ft_exit(char *str)
 void	ft_operation(t_fdf *p)
 {
 	mlx_hook(p->win_ptr, 2, 0, key_press, p);
-	mlx_hook(p->win_ptr, 17, 0, close_endian, p->mlx_ptr);
+	mlx_hook(p->win_ptr, 17, 0, close_endian, p);
 	mlx_hook(p->win_ptr, 4, 0, mouse_press, p);
 }
 
@@ -22,7 +22,7 @@ double	min_shift(t_fdf *p)
 
 	min_shift = WIDHT / (p->width + p->hight + 2) / cos(p->angle);
 	if ((min_shift * (p->width + p->hight - 2) * sin(p->angle)) > HIGHT)
-		min_shift = HIGHT / (p->width + p->hight - 2) / sin(p->angle);
+		min_shift = HIGHT / (p->width + p->hight + 2) / sin(p->angle);
 	return (min_shift);
 }
 
@@ -42,9 +42,10 @@ static t_fdf	copy_map_data(t_fdf p, t_map *map)
 	if (p.hgt * p.z_max > HIGHT)
 		p.hgt = HIGHT / p.z_max;
 	p.x0 = (WIDHT - (p.width + p.hight - 2) * p.shift * cos(p.angle)) / 2; // X0
-	// p.x0 = 0;
 	p.y0 = (HIGHT + (p.width - p.hight) * p.shift * sin(p.angle)) /2; // Y0
 	// p.y0 = HIGHT - p.hight* p.shift * sin(p.angle); // Y0 - map->z_min * p.hgt
+	// p.x0 = 0;
+	// p.y0 = 0;
 	return (p);
 }
 
@@ -53,7 +54,6 @@ int				main(int argc, char **argv)
 	int			fd;
 	t_fdf		p;
 	t_map		*map;
-	// static t_dot	**head;
 
 	map = NULL;
 	errno = 0;
@@ -94,7 +94,7 @@ int				main(int argc, char **argv)
 // 	free(tab);
 // }
 
-
+// static t_dot	**head;
 // head = (t_dot **)malloc(sizeof(t_dot *) * map->width * map->height);
 	// if (head == NULL)
 	// 	return (NULL);

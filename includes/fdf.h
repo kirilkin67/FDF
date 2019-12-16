@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 17:19:43 by wrhett            #+#    #+#             */
-/*   Updated: 2019/12/16 12:35:07 by wrhett           ###   ########.fr       */
+/*   Updated: 2019/12/16 15:19:45 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@
 # define ABS(Value) (Value > 0 ? Value : -Value)
 # define WIDHT	1500
 # define HIGHT	1200
-# define KH	1
+# define KZ	0.5
+# define KH	0.5
 # define ANGLE	0.523599
 # define ANGLE1	0.7853982
 # define COLOR1	0xFFFFFF

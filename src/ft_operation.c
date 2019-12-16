@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 17:17:57 by wrhett            #+#    #+#             */
-/*   Updated: 2019/12/16 14:01:23 by wrhett           ###   ########.fr       */
+/*   Updated: 2019/12/16 15:49:36 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,16 @@ void		zoom(int key, t_fdf *p)
 {
 	if (key == 24 || key == 5)
 	{
-		p->shift += 0.5;
-		p->hgt += 0.5;
+		p->shift += KZ;
+		p->hgt *= (1 + KZ / p->shift);
 	}
 	else if (key == 27 || key == 4)
 	{
-		p->shift -= 0.5;
-		p->hgt -= 0.5;
+		p->shift -= KZ;
+		if (p->shift > 1)
+			p->hgt *= (1 - KZ / p->shift);
+		else if (p->shift < 1)
+			p->hgt *= 1;
 	}
 	if (p->shift < 1)
 		p->shift = 1;
@@ -38,9 +41,9 @@ void		zoom(int key, t_fdf *p)
 static void	height(int key, t_fdf *p)
 {
 	if (key == 69)
-		p->hgt += 0.2;
+		p->hgt += KH;
 	else if (key == 78)
-		p->hgt -= 0.2;
+		p->hgt -= KH;
 	ft_drawing_iso(p);
 }
 
