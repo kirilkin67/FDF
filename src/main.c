@@ -16,16 +16,6 @@ void	ft_operation(t_fdf *p)
 	mlx_hook(p->win_ptr, 4, 0, mouse_press, p);
 }
 
-double	min_shift(t_fdf *p)
-{
-	double	min_shift;
-
-	min_shift = WIDHT / (p->width + p->hight + 2) / cos(p->angle);
-	if ((min_shift * (p->width + p->hight - 2) * sin(p->angle)) > HIGHT)
-		min_shift = HIGHT / (p->width + p->hight + 2) / sin(p->angle);
-	return (min_shift);
-}
-
 static t_fdf	copy_map_data(t_fdf p, t_map *map)
 {
 	p.zoom = "zoom + or - ";
@@ -35,17 +25,9 @@ static t_fdf	copy_map_data(t_fdf p, t_map *map)
 	p.hight = map->height;
 	p.coords = map->coords_arr;
 	p.colors = map->colors_arr;
-	p.z_max = map->z_range;
-	p.angle = ANGLE;
-	p.shift = min_shift(&p);
-	p.hgt = p.shift;
-	if (p.hgt * p.z_max > HIGHT)
-		p.hgt = HIGHT / p.z_max;
-	p.x0 = (WIDHT - (p.width + p.hight - 2) * p.shift * cos(p.angle)) / 2; // X0
-	p.y0 = (HIGHT + (p.width - p.hight) * p.shift * sin(p.angle)) /2; // Y0
-	// p.y0 = HIGHT - p.hight* p.shift * sin(p.angle); // Y0 - map->z_min * p.hgt
-	// p.x0 = 0;
-	// p.y0 = 0;
+	p.z_min = map->z_min;
+	p.z_max = map->z_max;
+	p.z_range = map->z_range;
 	return (p);
 }
 
@@ -78,7 +60,6 @@ int				main(int argc, char **argv)
 	p.win_ptr = mlx_new_window(p.mlx_ptr, WIDHT, HIGHT, "Fdf ISO"); //установить связь и открыть графическое окно
 	p.img_ptr = mlx_new_image(p.mlx_ptr, WIDHT, HIGHT);
 	p.draw = (int *)mlx_get_data_addr(p.img_ptr, &p.bpp, &p.size_line, &p.endian);
-	ft_drawing_iso(&p);
 	ft_operation(&p);
 	mlx_loop(p.mlx_ptr);
 	return (0);

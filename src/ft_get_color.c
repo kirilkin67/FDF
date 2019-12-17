@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 17:18:18 by wrhett            #+#    #+#             */
-/*   Updated: 2019/12/12 17:18:54 by wrhett           ###   ########.fr       */
+/*   Updated: 2019/12/17 15:08:55 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,22 @@ int			ft_get_point_colors(t_fdf *p, int n, int m)
 	else
 		color = p->colors[m * p->width + n];
 	return (color);
+}
+
+void	ft_drawing_fon(t_fdf *p)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < HIGHT)
+	{
+		x = 0;
+		while (x < WIDHT)
+		{
+			p->draw[x + y * WIDHT] = 0x8B8B83;
+			x += 1;
+		}
+		y += 1;
+	}
 }

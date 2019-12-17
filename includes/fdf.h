@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 17:19:43 by wrhett            #+#    #+#             */
-/*   Updated: 2019/12/16 15:19:45 by wrhett           ###   ########.fr       */
+/*   Updated: 2019/12/17 18:56:58 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@
 # define KZ	0.5
 # define KH	0.5
 # define ANGLE	0.523599
-# define ANGLE1	0.7853982
+# define ANGLE1	0.78539816339745
 # define COLOR1	0xFFFFFF
-# define COLOR2	0x8B008B
+# define COLOR2	0xFF00
 
 typedef enum
 {
@@ -75,7 +75,9 @@ typedef struct	s_fdf
 	int			*colors;
 	int			width;
 	int			hight;
+	int			z_min;
 	int			z_max;
+	int			z_range;
 	int			color1;
 	int			color2;
 	double		angle;
@@ -87,7 +89,7 @@ typedef struct	s_fdf
 	double		y1;
 	double		x2;
 	double		y2;
-	int			n;
+	int			flag;
 	int			m;
 
 }				t_fdf;
@@ -104,13 +106,14 @@ int				ft_read_map_2(const int fd, t_map *map);
 t_map			*ft_map_init(void);
 t_map			*ft_map_init_2(t_map *map);
 double			min_shift(t_fdf *p);
-float			min_shift_oblique(t_map *map, double angle);
+double			min_shift_oblique(t_fdf *p);
 int				ft_get_color(int color1, int color2, int step, int n);
 int				ft_get_color_2(int z_max, int n);
 int				ft_get_point_colors(t_fdf *p, int n, int m);
 void			ft_drawing_line(t_fdf *p);
 void			ft_drawing_fon(t_fdf *p);
 void			ft_drawing_iso(t_fdf *p);
+void			ft_drawing_iso_obl(t_fdf *p);
 void			ft_operation(t_fdf *p);
 void			ft_operation_mouse(t_fdf *p);
 

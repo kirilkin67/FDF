@@ -6,13 +6,13 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 16:16:55 by wrhett            #+#    #+#             */
-/*   Updated: 2019/12/16 18:19:08 by wrhett           ###   ########.fr       */
+/*   Updated: 2019/12/17 16:22:16 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	ft_drawing_line(t_fdf *p)
+void		ft_drawing_line(t_fdf *p)
 {
 	double	deltax;
 	double	deltay;
@@ -38,7 +38,17 @@ void	ft_drawing_line(t_fdf *p)
 	}
 }
 
-void	ft_drawing_width_line(t_fdf *p, double x0, double y0)
+double		min_shift(t_fdf *p)
+{
+	double	min_shift;
+
+	min_shift = WIDHT / (p->width + p->hight + 2) / cos(p->angle);
+	if ((min_shift * (p->width + p->hight - 2) * sin(p->angle) + p->z_range * min_shift) > HIGHT)
+		min_shift = HIGHT / ((p->width + p->hight + 2) * sin(p->angle) + p->z_range + 2);
+	return (min_shift);
+}
+
+static void	ft_drawing_width_line(t_fdf *p, double x0, double y0)
 {
 	int	n;
 	int	m;
@@ -66,7 +76,7 @@ void	ft_drawing_width_line(t_fdf *p, double x0, double y0)
 	}
 }
 
-void	ft_drawing_hight_line(t_fdf *p, double x0, double y0)
+static void	ft_drawing_hight_line(t_fdf *p, double x0, double y0)
 {
 	int	n;
 	int	m;
@@ -94,32 +104,11 @@ void	ft_drawing_hight_line(t_fdf *p, double x0, double y0)
 	}
 }
 
-void	ft_drawing_fon(t_fdf *p)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < HIGHT)
-	{
-		x = 0;
-		while (x < WIDHT)
-		{
-			p->draw[x + y * WIDHT] = 0x8B8B83;
-			x += 1;
-		}
-		y += 1;
-	}
-}
-
 void	ft_drawing_iso(t_fdf *p)
 {
 	double	x0;
 	double	y0;
-	int		n;
 
-	// x0 = p->x0 + (WIDHT - (p->width + p->hight - 2) * p->shift * cos(p->angle)) / 2;
-	// y0 = p->y0 + HIGHT - p->hight* p->shift * sin(p->angle);
 	x0 = p->x0;
 	y0 = p->y0;
 	ft_bzero(p->draw, WIDHT * HIGHT * 4);

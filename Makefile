@@ -6,7 +6,7 @@
 #    By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/12 17:31:15 by wrhett            #+#    #+#              #
-#    Updated: 2019/12/16 13:09:46 by wrhett           ###   ########.fr        #
+#    Updated: 2019/12/17 12:47:40 by wrhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ NAME = fdf
 CC = gcc
 
 SRC_DIR = src/
-SRC_LIST = main.c ft_atoi_base.c ft_drawing_iso.c ft_get_color.c ft_get_map.c \
-	ft_operation.c ft_operation_mouse.c ft_read_map.c
+SRC_LIST = main.c ft_atoi_base.c ft_get_color.c ft_get_map.c ft_read_map.c \
+	ft_operation.c ft_operation_mouse.c ft_drawing_iso.c ft_drawing_iso_obl.c
 SRC = $(addprefix $(SRC_DIR), $(SRC_LIST))
 
 OBJECTS_DIR = objects/
