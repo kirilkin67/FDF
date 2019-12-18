@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 16:16:55 by wrhett            #+#    #+#             */
-/*   Updated: 2019/12/17 16:22:16 by wrhett           ###   ########.fr       */
+/*   Updated: 2019/12/18 18:31:41 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,10 @@ double		min_shift(t_fdf *p)
 	double	min_shift;
 
 	min_shift = WIDHT / (p->width + p->hight + 2) / cos(p->angle);
-	if ((min_shift * (p->width + p->hight - 2) * sin(p->angle) + p->z_range * min_shift) > HIGHT)
-		min_shift = HIGHT / ((p->width + p->hight + 2) * sin(p->angle) + p->z_range + 2);
+	if ((min_shift * (p->width + p->hight - 2) * sin(p->angle) + \
+			p->z_range * min_shift) > HIGHT)
+		min_shift = HIGHT / ((p->width + p->hight + 2) * sin(p->angle) + \
+					p->z_range + 2);
 	return (min_shift);
 }
 
@@ -104,7 +106,7 @@ static void	ft_drawing_hight_line(t_fdf *p, double x0, double y0)
 	}
 }
 
-void	ft_drawing_iso(t_fdf *p)
+void		ft_drawing_iso(t_fdf *p)
 {
 	double	x0;
 	double	y0;
@@ -112,11 +114,12 @@ void	ft_drawing_iso(t_fdf *p)
 	x0 = p->x0;
 	y0 = p->y0;
 	ft_bzero(p->draw, WIDHT * HIGHT * 4);
-	// ft_drawing_fon(p);
 	ft_drawing_width_line(p, x0, y0);
 	ft_drawing_hight_line(p, x0, y0);
 	mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 0, 0);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 20, 0xFFFFFF, p->zoom);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 40, 0xFFFFFF, p->offset);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 60, 0xFFFFFF, p->height);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 20, 0xFFFFFF, STR1);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 40, 0xFFFFFF, STR2);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 60, 0xFFFFFF, STR3);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 80, 0xFFFFFF, STR4);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 100, 0xFFFFFF, STR5);
 }

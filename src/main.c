@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/12/18 17:56:28 by wrhett            #+#    #+#             */
+/*   Updated: 2019/12/18 18:29:38 by wrhett           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/fdf.h"
 
 void			ft_exit(char *str)
@@ -9,18 +21,28 @@ void			ft_exit(char *str)
 	exit(1);
 }
 
-void	ft_operation(t_fdf *p)
+void			ft_operation(t_fdf *p)
 {
 	mlx_hook(p->win_ptr, 2, 0, key_press, p);
 	mlx_hook(p->win_ptr, 17, 0, close_endian, p);
 	mlx_hook(p->win_ptr, 4, 0, mouse_press, p);
+	mlx_hook(p->win_ptr, 5, 0, mouse_release, p);
+	mlx_hook(p->win_ptr, 6, 0, mouse_movement, p);
+}
+
+static void		ft_initialize_mlx(t_fdf *p)
+{
+	p->mlx_ptr = mlx_init();
+	p->win_ptr = mlx_new_window(p->mlx_ptr, WIDHT, HIGHT, "Fdf ISO");
+	p->img_ptr = mlx_new_image(p->mlx_ptr, WIDHT, HIGHT);
+	p->draw = \
+	(int *)mlx_get_data_addr(p->img_ptr, &p->bpp, &p->size_line, &p->endian);
+	ft_operation(p);
+	mlx_loop(p->mlx_ptr);
 }
 
 static t_fdf	copy_map_data(t_fdf p, t_map *map)
 {
-	p.zoom = "zoom + or - ";
-	p.offset = "shift -> or <- UP or DOWN";
-	p.height = "heigt + or -";
 	p.width = map->width;
 	p.hight = map->height;
 	p.coords = map->coords_arr;
@@ -28,6 +50,7 @@ static t_fdf	copy_map_data(t_fdf p, t_map *map)
 	p.z_min = map->z_min;
 	p.z_max = map->z_max;
 	p.z_range = map->z_range;
+	p.mouse_key = -1;
 	return (p);
 }
 
@@ -56,26 +79,6 @@ int				main(int argc, char **argv)
 	else
 		ft_exit(ERR_USAGE);
 	p = copy_map_data(p, map);
-	p.mlx_ptr = mlx_init(); //подключениу к графической библиотеке
-	p.win_ptr = mlx_new_window(p.mlx_ptr, WIDHT, HIGHT, "Fdf ISO"); //установить связь и открыть графическое окно
-	p.img_ptr = mlx_new_image(p.mlx_ptr, WIDHT, HIGHT);
-	p.draw = (int *)mlx_get_data_addr(p.img_ptr, &p.bpp, &p.size_line, &p.endian);
-	ft_operation(&p);
-	mlx_loop(p.mlx_ptr);
+	ft_initialize_mlx(&p);
 	return (0);
 }
-
-// void		ft_free_array(void **tab, size_t index)
-// {
-// 	while (index > 0)
-// 	{
-// 		free(tab[index - 1]);
-// 		index -= 1;
-// 	}
-// 	free(tab);
-// }
-
-// static t_dot	**head;
-// head = (t_dot **)malloc(sizeof(t_dot *) * map->width * map->height);
-	// if (head == NULL)
-	// 	return (NULL);

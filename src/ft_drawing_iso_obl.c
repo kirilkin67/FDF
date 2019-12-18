@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_drawing_iso_obl.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/12/18 18:04:49 by wrhett            #+#    #+#             */
+/*   Updated: 2019/12/18 19:13:01 by wrhett           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/fdf.h"
 
 double		min_shift_oblique(t_fdf *p)
@@ -14,12 +26,12 @@ static void	ft_drawing_width_line_obl(t_fdf *p, double x0, double y0)
 {
 	int	n;
 	int	m;
-	
+
 	m = 0;
 	while (m < p->hight)
 	{
 		n = 0;
-		while ( n < (p->width - 1))
+		while (n < (p->width - 1))
 		{
 			p->x1 = x0 + p->shift * n;
 			p->y1 = y0 - p->coords[m * p->width + n] * p->hgt * cos(ANGLE1);
@@ -40,12 +52,12 @@ static void	ft_drawing_hight_line_obl(t_fdf *p, double x0, double y0)
 {
 	int	n;
 	int	m;
-	
+
 	n = 0;
 	while (n < p->width)
 	{
 		m = 0;
-		while ( m < (p->hight - 1))
+		while (m < (p->hight - 1))
 		{
 			p->x1 = x0 + p->shift * cos(p->angle) * m;
 			p->y1 = y0 + p->shift * sin(p->angle) * m - \
@@ -63,21 +75,20 @@ static void	ft_drawing_hight_line_obl(t_fdf *p, double x0, double y0)
 	}
 }
 
-void	ft_drawing_iso_obl(t_fdf *p)
+void		ft_drawing_iso_obl(t_fdf *p)
 {
 	double	x0;
 	double	y0;
-	
-	x0 = p->x0;// Xo
-	y0 = p->y0; // Yo
+
+	x0 = p->x0;
+	y0 = p->y0;
 	ft_bzero(p->draw, WIDHT * HIGHT * 4);
 	ft_drawing_width_line_obl(p, x0, y0);
 	ft_drawing_hight_line_obl(p, x0, y0);
 	mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 0, 0);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 20, 0xFFFFFF, p->zoom);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 40, 0xFFFFFF, p->offset);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 60, 0xFFFFFF, p->height);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 20, 0xFFFFFF, STR1);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 40, 0xFFFFFF, STR2);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 60, 0xFFFFFF, STR3);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 80, 0xFFFFFF, STR4);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 100, 0xFFFFFF, STR5);
 }
-
-// 0.78539816339745 - 45 град
-// 1.570784 - 90

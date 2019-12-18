@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_get_map.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/12/18 18:00:11 by wrhett            #+#    #+#             */
+/*   Updated: 2019/12/18 18:00:43 by wrhett           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/fdf.h"
 
 t_map	*ft_map_init(void)
@@ -25,6 +37,5 @@ t_map	*ft_map_init_2(t_map *map)
 		ft_exit(ERR_CONV_TO_ARR);
 	if (!(map->colors_arr = (int *)ft_memalloc(arr_size)))
 		ft_exit(ERR_CONV_TO_ARR);
-
 	return (map);
 }

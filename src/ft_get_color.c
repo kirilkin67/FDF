@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 17:18:18 by wrhett            #+#    #+#             */
-/*   Updated: 2019/12/17 15:08:55 by wrhett           ###   ########.fr       */
+/*   Updated: 2019/12/18 17:58:56 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int			ft_get_point_colors(t_fdf *p, int n, int m)
 	return (color);
 }
 
-void	ft_drawing_fon(t_fdf *p)
+void		ft_drawing_fon(t_fdf *p)
 {
 	int	x;
 	int	y;

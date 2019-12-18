@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 17:19:43 by wrhett            #+#    #+#             */
-/*   Updated: 2019/12/17 18:56:58 by wrhett           ###   ########.fr       */
+/*   Updated: 2019/12/18 19:30:41 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,13 @@
 # define KH	0.5
 # define ANGLE	0.523599
 # define ANGLE1	0.78539816339745
-# define COLOR1	0xFFFFFF
-# define COLOR2	0xFF00
+# define COLOR1	0x800080
+# define COLOR2	0xFFFFFF
+# define STR1	"zoom + or - "
+# define STR2	"shift -> or <- UP or DOWN"
+# define STR3	"heigt + or -"
+# define STR4	"Isometric view - key I"
+# define STR5	"Oblique isometric view - key O"
 
 typedef enum
 {
@@ -68,9 +73,6 @@ typedef struct	s_fdf
 	int			bpp;
 	int			size_line;
 	int			endian;
-	char		*zoom;
-	char		*offset;
-	char		*height;
 	int			*coords;
 	int			*colors;
 	int			width;
@@ -80,6 +82,9 @@ typedef struct	s_fdf
 	int			z_range;
 	int			color1;
 	int			color2;
+	int			mouse_key;
+	int			mouse_x;
+	int			mouse_y;
 	double		angle;
 	double		shift;
 	double		hgt;
@@ -98,6 +103,8 @@ int				close_endian(void *param);
 void			zoom(int key, t_fdf *p);
 int				key_press(int key, void *param);
 int				mouse_press(int button, int x, int y, void *param);
+int				mouse_release(int button, int x, int y, void *param);
+int				mouse_movement(int x, int y, void *param);
 void			ft_exit(char *str);
 t_bool			ft_isnumber(char *str, int base);
 int				ft_atoi_base(const char *str, int base);
@@ -114,7 +121,7 @@ void			ft_drawing_line(t_fdf *p);
 void			ft_drawing_fon(t_fdf *p);
 void			ft_drawing_iso(t_fdf *p);
 void			ft_drawing_iso_obl(t_fdf *p);
-void			ft_operation(t_fdf *p);
+void			ft_operation_key(t_fdf *p);
 void			ft_operation_mouse(t_fdf *p);
 
 #endif

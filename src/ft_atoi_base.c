@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 15:10:00 by wrhett            #+#    #+#             */
-/*   Updated: 2019/12/09 17:50:21 by wrhett           ###   ########.fr       */
+/*   Updated: 2019/12/18 18:00:01 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_bool			ft_isnumber(char *str, int base)
 		i++;
 	else if (base == 10 && (str[i] == '-' || str[i] == '+'))
 		i++;
-	while (str[i] >= value[0] && lower_in_upper(str[i]) <= (value[base -1]))
+	while (str[i] >= value[0] && lower_in_upper(str[i]) <= (value[base - 1]))
 	{
 		i++;
 		digits++;
@@ -96,7 +96,7 @@ int				ft_atoi_base(const char *str, int base)
 		i++;
 	else if (base == 10 && (str[i] == '-' || str[i] == '+'))
 		sign = (str[i++] == '-') ? -1 : 1;
-	while (str[i] >= value[0] && lower_in_upper(str[i]) <= (value[base -1]))
+	while (str[i] >= value[0] && lower_in_upper(str[i]) <= (value[base - 1]))
 		result = result * base + value_digit(str[i++]);
 	return ((int)(result * sign));
 }
