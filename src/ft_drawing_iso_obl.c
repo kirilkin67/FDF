@@ -6,21 +6,53 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 18:04:49 by wrhett            #+#    #+#             */
-/*   Updated: 2019/12/18 19:13:01 by wrhett           ###   ########.fr       */
+/*   Updated: 2019/12/25 18:31:05 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
+// double		min_shift_oblique(t_fdf *p) // первая версия
+// {
+// 	double	shift;
+
+// 	shift = WIDHT / (p->width + p->hight * sin(p->angle));
+// 	if ((shift * (p->hight - 1) * sin(p->angle) + p->z_max * shift) > HIGHT)
+// 		shift = HIGHT / ((p->hight - 1) * sin(p->angle) + p->z_range + 2);
+// 	if (shift < 1)
+// 		shift = 1;
+// 	return (shift);
+// }
+
 double		min_shift_oblique(t_fdf *p)
 {
 	double	shift;
 
-	shift = WIDHT / (p->width + p->hight * sin(p->angle));
-	if ((shift * (p->hight - 1) * sin(p->angle) + p->z_max * shift) > HIGHT)
-		shift = HIGHT / ((p->hight - 1) * sin(p->angle) + p->z_range + 2);
+	shift = WIDHT / (p->width + 1 + (p->hight + 1) * sin(p->angle));
+	if (shift * (p->hight - 1) * sin(p->angle) > HIGHT)
+		shift = HIGHT / ((p->hight + 1) * sin(p->angle));
+	if (shift < 1)
+		shift = 1;
 	return (shift);
 }
+
+void		ft_parametr_iso_obl(t_fdf *p)
+{
+	p->flag = 1;
+	p->angle = ANGLE1;
+	p->shift = min_shift_oblique(p);
+	if (p->z_range != 0)
+		p->hgt = ABS((HIGHT - (p->hight - 1) * p->shift * \
+				sin(p->angle))/ p->z_range);
+	p->x0 = (WIDHT - p->shift * (p->width - 1 + (p->hight - 1) * \
+			sin(p->angle))) / 2;
+	if (p->z_range == 0)
+		p->y0 = (HIGHT - (p->hight - 1) * p->shift * sin(p->angle)) / 2;
+	else
+		p->y0 = (p->z_max > p->z_min) ? p->hgt * (p->z_max - 1) : \
+		HIGHT - (p->z_min * p->hgt + p->hight * sin(p->angle));
+}
+
 
 static void	ft_drawing_width_line_obl(t_fdf *p, double x0, double y0)
 {
@@ -83,8 +115,8 @@ void		ft_drawing_iso_obl(t_fdf *p)
 	x0 = p->x0;
 	y0 = p->y0;
 	ft_bzero(p->draw, WIDHT * HIGHT * 4);
-	ft_drawing_width_line_obl(p, x0, y0);
 	ft_drawing_hight_line_obl(p, x0, y0);
+	ft_drawing_width_line_obl(p, x0, y0);
 	mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 0, 0);
 	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 20, 0xFFFFFF, STR1);
 	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 40, 0xFFFFFF, STR2);

@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 17:19:43 by wrhett            #+#    #+#             */
-/*   Updated: 2019/12/18 19:30:41 by wrhett           ###   ########.fr       */
+/*   Updated: 2019/12/25 16:55:48 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,24 @@
 # include <mlx.h>
 # include "../libft/libft.h"
 # include "error.h"
+// # define ERR_USAGE			"Usage: (1 map file) ./fdf <filename>"
+// # define ERR_MAP			"Incorrect filename. Error"
+// # define ERR_MAP_READING	"Reading error"
+// # define ERR_MAP_INIT		"Map initialization error"
+// # define ERR_FILE			"Incorrect file. Wrong line length. Exit"
+// # define ERR_FDF_INIT		"FdF initialization error. Error"
+// # define ERR_CONV_TO_ARR	"Conversion to array"
 # define ABS(Value) (Value > 0 ? Value : -Value)
 # define WIDHT	1500
 # define HIGHT	1200
-# define KZ	0.5
-# define KH	0.5
-# define ANGLE	0.523599
-# define ANGLE1	0.78539816339745
+# define KZ	15
+# define KZ_MAX	1
+# define KZ_MIN	0.05
+# define KH_MAX	0.5
+# define KH_MIN	0.1
+# define ANGLE	0.5235987755983
+# define ANGLE1	0.785398
+# define K_LOOK 0.087266462599716
 # define COLOR1	0x800080
 # define COLOR2	0xFFFFFF
 # define STR1	"zoom + or - "
@@ -53,17 +64,6 @@ typedef struct	s_map
 	int			z_range;
 }				t_map;
 
-typedef struct	s_dot
-{
-	double		x0;
-	double		y0;
-	double		z0;
-	int			color;
-	double		x1;
-	double		y1;
-	double		z1;
-}				t_dot;
-
 typedef struct	s_fdf
 {
 	void		*mlx_ptr;
@@ -86,6 +86,7 @@ typedef struct	s_fdf
 	int			mouse_x;
 	int			mouse_y;
 	double		angle;
+	double		k_look;
 	double		shift;
 	double		hgt;
 	double		x0;
@@ -94,13 +95,21 @@ typedef struct	s_fdf
 	double		y1;
 	double		x2;
 	double		y2;
+	int			deltax;
+	int			deltay;
+	int			sign_x;
+	int			sign_y;
+	int			error;
+	int			error2;
+	int 		step;
 	int			flag;
-	int			m;
+	int			n;
 
 }				t_fdf;
 
 int				close_endian(void *param);
 void			zoom(int key, t_fdf *p);
+void			look(int key, t_fdf *p);
 int				key_press(int key, void *param);
 int				mouse_press(int button, int x, int y, void *param);
 int				mouse_release(int button, int x, int y, void *param);
@@ -119,7 +128,9 @@ int				ft_get_color_2(int z_max, int n);
 int				ft_get_point_colors(t_fdf *p, int n, int m);
 void			ft_drawing_line(t_fdf *p);
 void			ft_drawing_fon(t_fdf *p);
+void			ft_parametr_iso(t_fdf *p);
 void			ft_drawing_iso(t_fdf *p);
+void			ft_parametr_iso_obl(t_fdf *p);
 void			ft_drawing_iso_obl(t_fdf *p);
 void			ft_operation_key(t_fdf *p);
 void			ft_operation_mouse(t_fdf *p);

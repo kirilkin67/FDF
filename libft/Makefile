@@ -6,7 +6,7 @@
 #    By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/08 15:16:11 by wrhett            #+#    #+#              #
-#    Updated: 2019/12/16 13:01:05 by wrhett           ###   ########.fr        #
+#    Updated: 2019/12/20 12:15:33 by wrhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,6 +91,7 @@ $(OBJECTS): %.o: %.c
 $(NAME): $(OBJECTS)
 		@ar rc $@ $^
 		@ranlib $(NAME)
+		@echo "\033[32m$(NAME) file: was created\033[0m"
 
 clean:
 		@/bin/rm -f $(OBJECTS)

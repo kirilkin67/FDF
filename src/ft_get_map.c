@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 18:00:11 by wrhett            #+#    #+#             */
-/*   Updated: 2019/12/18 18:00:43 by wrhett           ###   ########.fr       */
+/*   Updated: 2019/12/19 14:56:13 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ t_map	*ft_map_init(void)
 	map->height = 0;
 	map->coords_arr = NULL;
 	map->colors_arr = NULL;
-	map->z_min = INT_MAX;
-	map->z_max = INT_MIN;
+	map->z_min = 0;
+	map->z_max = 0;
 	map->z_range = 0;
 	return (map);
 }

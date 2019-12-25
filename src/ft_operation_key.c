@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 17:17:57 by wrhett            #+#    #+#             */
-/*   Updated: 2019/12/18 19:12:44 by wrhett           ###   ########.fr       */
+/*   Updated: 2019/12/25 16:54:08 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static void	height(int key, t_fdf *p)
 {
 	if (key == 69)
-		p->hgt = (p->shift > 10) ? p->hgt + 0.5 : p->hgt + 0.1;
+		p->hgt = (p->shift > KZ) ? p->hgt + KH_MAX : p->hgt + KH_MIN;
 	else if (key == 78)
-		p->hgt = (p->shift > 10) ? p->hgt - 0.5 : p->hgt - 0.1;
+		p->hgt = (p->shift > KZ) ? p->hgt - KH_MAX : p->hgt - KH_MIN;
 	if (p->flag == 0)
 		ft_drawing_iso(p);
 	else if (p->flag == 1)
@@ -48,33 +48,33 @@ static void	shift(int key, t_fdf *p)
 		ft_drawing_iso_obl(p);
 }
 
-static void	parametr_iso(t_fdf *p)
-{
-	p->flag = 0;
-	p->angle = ANGLE;
-	p->shift = min_shift(p);
-	p->hgt = p->shift;
-	p->x0 = (WIDHT - (p->width + p->hight - 2) * p->shift * \
-			cos(p->angle)) / 2;
-	p->y0 = p->width * p->shift * sin(p->angle) + p->z_max * p->shift;
-	p->hgt = p->shift;
-	if (p->hgt * p->z_range > HIGHT)
-		p->hgt = ABS(HIGHT / p->z_range);
-}
+// static void	parametr_iso(t_fdf *p) // первая версия
+// {
+// 	p->flag = 0;
+// 	p->angle = ANGLE;
+// 	p->shift = min_shift(p);
+// 	p->hgt = p->shift;
+// 	p->x0 = (WIDHT - (p->width + p->hight - 2) * p->shift * \
+// 			cos(p->angle)) / 2;
+// 	p->y0 = p->width * p->shift * sin(p->angle) + p->z_max * p->shift;
+// 	p->hgt = p->shift;
+// 	if (p->hgt * p->z_range > HIGHT)
+// 		p->hgt = ABS(HIGHT / p->z_range);
+// }
 
-static void	parametr_iso_obl(t_fdf *p)
-{
-	p->flag = 1;
-	p->angle = ANGLE1;
-	p->shift = min_shift_oblique(p);
-	p->x0 = (WIDHT - p->shift * (p->width - 1 + (p->hight - 1) * \
-			sin(p->angle))) / 2;
-	p->y0 = (p->z_max == 0) ? \
-		(HIGHT - p->hight * p->shift * sin(p->angle)) : p->z_max * p->shift;
-	p->hgt = p->shift;
-	if (p->hgt * p->z_range > HIGHT)
-		p->hgt = ABS(HIGHT / p->z_range);
-}
+// static void	parametr_iso_obl(t_fdf *p)
+// {
+// 	p->flag = 1;
+// 	p->angle = ANGLE1;
+// 	p->shift = min_shift_oblique(p);
+// 	p->x0 = (WIDHT - p->shift * (p->width - 1 + (p->hight - 1) * \
+// 			sin(p->angle))) / 2;
+// 	p->y0 = (p->z_max == 0) ? \
+// 		(HIGHT - p->hight * p->shift * sin(p->angle)) : p->z_max * p->shift;
+// 	p->hgt = p->shift;
+// 	if (p->hgt * p->z_range > HIGHT)
+// 		p->hgt = ABS(HIGHT / p->z_range);
+// }
 
 int			key_press(int key, void *param)
 {
@@ -89,14 +89,16 @@ int			key_press(int key, void *param)
 		height(key, p);
 	if (key == 125 || key == 126 || key == 123 || key == 124)
 		shift(key, p);
+	if (key == 6 || key == 7)
+		look(key, p); 
 	if (key == 34)
 	{
-		parametr_iso(p);
+		ft_parametr_iso(p);
 		ft_drawing_iso(p);
 	}
 	if (key == 31)
 	{
-		parametr_iso_obl(p);
+		ft_parametr_iso_obl(p);
 		ft_drawing_iso_obl(p);
 	}
 	return (0);

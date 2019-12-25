@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 15:43:44 by wrhett            #+#    #+#             */
-/*   Updated: 2019/12/11 12:12:29 by wrhett           ###   ########.fr       */
+/*   Updated: 2019/12/20 12:35:38 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@ static void	new_coord_2(char *str, t_map *map)
 	z = ft_atoi(parts[0]);
 	color = parts[1] ? ft_atoi_base(parts[1], 16) : -1;
 	coord_to_arr(z, color, map);
+	free(parts[1]);
+	free(parts[0]);
+	free(parts);
+	free(str);
 }
 
 static int	how_many_words(char const *str, char c)
@@ -77,8 +81,9 @@ int			ft_read_map_prev(const int fd, t_map *map)
 		if (map->height == 0)
 			map->width = words;
 		else if (map->width != words)
-			ft_exit(ERR_MAP);
+			ft_exit(ERR_FILE);
 		map->height += 1;
+		ft_strdel(&line);
 	}
 	return (result);
 }
@@ -88,14 +93,17 @@ int			ft_read_map_2(const int fd, t_map *map)
 	char	*line;
 	int		result;
 	char	**line_coord;
+	char	**tmp;
 
 	while ((result = get_next_line(fd, &line)) == 1)
 	{
 		if (!(line_coord = ft_strsplit(line, ' ')))
 			ft_exit(ERR_MAP_READING);
+		ft_strdel(&line);
+		tmp = line_coord;
 		while (*line_coord)
 			new_coord_2(*(line_coord++), map);
-		ft_strdel(&line);
+		free(tmp);
 	}
 	return (result);
 }
