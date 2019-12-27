@@ -6,15 +6,15 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/25 18:35:26 by wrhett            #+#    #+#             */
-/*   Updated: 2019/12/25 18:35:27 by wrhett           ###   ########.fr       */
+/*   Updated: 2019/12/27 13:54:46 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-/* Function Digital Differential Analyzer on the double*/
+/* Function Digital Differential Analyzer on the double in header*/
 
-//void		ft_drawing_line(t_fdf *p) 
+// void		ft_drawing_line(t_fdf *p) 
 // {
 // 	double	deltax;
 // 	double	deltay;
@@ -31,9 +31,9 @@
 // 	while (n <= step)
 // 	{
 // 		color = ft_get_color(p->color1, p->color2, step, n);
-// 		if ((int)p->x1 >= 0 && (int)p->x1 <= (WIDHT - 1) \
-// 			&& (int)p->y1 >= 0 && (int)p->y1 <= (HIGHT - 1))
-// 			p->draw[(int)p->x1 + (int)p->y1 * WIDHT] = color;
+// 		if ((int)p->x1 >= 0 && (int)p->x1 <= (WIDHT - 2) \
+// 			&& (int)p->y1 >= 0 && (int)p->y1 <= (HIGHT - 2))
+// 			p->draw[(int)round(p->x1) + (int)round(p->y1) * WIDHT] = color;
 // 		p->x1 = p->x1 + deltax;
 // 		p->y1 = p->y1 + deltay;
 // 		n += 1;
@@ -84,18 +84,17 @@
 
 void	ft_drawing_line(t_fdf *p)
 {
-	p->deltax = ABS(((int)p->x2 - (int)p->x1));
-	p->deltay = ABS(((int)p->y2 - (int)p->y1));
+	p->deltax = ABS((p->x2 - p->x1));
+	p->deltay = ABS((p->y2 - p->y1));
 	p->step = (p->deltax >= p->deltay) ? p->deltax : p->deltay;
-	p->sign_x = (int)p->x1 < (int)p->x2 ? 1 : -1;
-	p->sign_y = (int)p->y1 < (int)p->y2 ? 1 : -1;
+	p->sign_x = p->x1 < p->x2 ? 1 : -1;
+	p->sign_y = p->y1 < p->y2 ? 1 : -1;
 	p->error = p->deltax - p->deltay;
 	p->n = 0;
-	while (p->n++ <= p->step)//(p->x1 <= p->x2 && p->y1 <= p->y2)
+	while (p->x1 != p->x2 || p->y1 != p->y2) // (p->n++ <= p->step)
 	{
-		if ((int)p->x1 >= 0 && (int)p->x1 <= (WIDHT - 1) \
-			&& (int)p->y1 >= 0 && (int)p->y1 <= (HIGHT - 1))
-			p->draw[(int)p->x1 + (int)p->y1 * WIDHT] = \
+		if (p->x1 >= 0 && p->x1 <= WIDHT - 1 && p->y1 >= 0 && p->y1 <= HIGHT - 1)
+			p->draw[p->x1 + p->y1 * WIDHT] = \
 			ft_get_color(p->color1, p->color2, p->step, p->n);
 		p->error2 = p->error * 2;
 		if (p->error2 > -p->deltay)
@@ -108,5 +107,6 @@ void	ft_drawing_line(t_fdf *p)
 			p->error += p->deltax;
 			p->y1 += p->sign_y;
 		}
+		p->n++;
 	}
 }

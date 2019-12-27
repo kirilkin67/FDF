@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 17:19:43 by wrhett            #+#    #+#             */
-/*   Updated: 2019/12/25 16:55:48 by wrhett           ###   ########.fr       */
+/*   Updated: 2019/12/27 12:47:35 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define ABS(Value) (Value > 0 ? Value : -Value)
 # define WIDHT	1500
 # define HIGHT	1200
-# define KZ	15
+# define KZ	10
 # define KZ_MAX	1
 # define KZ_MIN	0.05
 # define KH_MAX	0.5
@@ -91,10 +91,10 @@ typedef struct	s_fdf
 	double		hgt;
 	double		x0;
 	double		y0;
-	double		x1;
-	double		y1;
-	double		x2;
-	double		y2;
+	int			x1;
+	int			y1;
+	int			x2;
+	int			y2;
 	int			deltax;
 	int			deltay;
 	int			sign_x;

@@ -6,7 +6,7 @@
 #    By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/12 17:31:15 by wrhett            #+#    #+#              #
-#    Updated: 2019/12/25 12:59:51 by wrhett           ###   ########.fr        #
+#    Updated: 2019/12/26 12:30:21 by wrhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = gcc
 
 SRC_DIR = ./src/
 SRC_LIST = main.c ft_atoi_base.c ft_get_color.c ft_get_map.c ft_read_map.c \
-	ft_operation_key.c ft_operation_mouse.c \
+	ft_operation.c ft_operation_key.c ft_operation_mouse.c \
 	ft_drawing_line.c ft_drawing_iso.c ft_drawing_iso_obl.c
 SRC = $(addprefix $(SRC_DIR), $(SRC_LIST))
 
