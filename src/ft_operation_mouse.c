@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 18:03:40 by wrhett            #+#    #+#             */
-/*   Updated: 2019/12/27 15:49:45 by wrhett           ###   ########.fr       */
+/*   Updated: 2019/12/30 15:46:02 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,56 +18,18 @@ int		close_endian(void *param)
 	exit(0);
 }
 
-// void	zoom(int key, t_fdf *p)
-// {
-// 	if ((key == 24 || key == 5) && p->shift < WIDHT)
-// 	{
-// 			p->shift = (p->shift > KZ) ? p->shift + KZ_MAX : p->shift + KZ_MIN;
-// 			p->hgt = (p->shift > KZ) ? p->hgt * (1 + KZ_MAX / p->shift) : \
-// 			p->hgt * (1 + KZ_MIN / p->shift);
-// 	}
-// 	else if (key == 27 || key == 4)
-// 	{
-// 		p->shift = (p->shift > KZ) ? p->shift - KZ_MAX : p->shift - KZ_MIN;
-// 		if (p->shift > 1)
-// 			p->hgt = (p->shift > KZ) ? p->hgt * (1 - KZ_MAX / p->shift) : \
-// 			p->hgt * (1 - KZ_MIN / p->shift);
-// 		else if (p->shift < 1)
-// 			p->hgt *= 1;
-// 	}
-// 	if (p->shift < 1)
-// 		p->shift = 1;
-// 	p->x0 = (p->flag == 0) ? (WIDHT - p->shift * (p->width + p->hight - 2) * \
-// 	cos(p->angle)) / 2 : (WIDHT - p->shift * (p->width - 1 + (p->hight - 1) * \
-// 	sin(p->angle))) / 2;
-// 	p->flag == 0 ? ft_drawing_iso(p) : ft_drawing_iso_obl(p);
-// }
-
-void	look(int key, t_fdf *p)
-{
-	if (key == 6)
-		p->k_look += K_LOOK;
-	else if (key == 7)
-		p->k_look -= K_LOOK;
-	p->angle = ANGLE - p->k_look;
-	p->x0 = (p->flag == 0) ? (WIDHT - p->shift * (p->width + p->hight - 2) * \
-	cos(p->angle)) / 2 : (WIDHT - p->shift * (p->width - 1 + (p->hight - 1) * \
-	cos(p->angle))) / 2;
-	p->flag == 0 ? ft_drawing_iso(p) : ft_drawing_iso_obl(p);
-}
-
 int		mouse_press(int button, int x, int y, void *param)
 {
 	t_fdf *p;
 
 	p = (t_fdf *)param;
-	if (button == 4 || button == 5)
+	if (button == 4 || button == 5) // колесико scrol UP +, scroll DOWN -
 	{
 		p->mouse_x = x;
 		p->mouse_y = y;
-		zoom(button, p);
+		zoom_mouse(button, p);
 	}
-	else if (button == 1 && (y >= 0 && y <= HIGHT) && (x >= 0 && y <= WIDHT))
+	else if (button == 1 && (y >= 0 && y <= (HIGHT - 1)) && (x >= 0 && y <= (WIDHT - 1)))
 		p->mouse_key = 1;
 	return (0);
 }
@@ -76,13 +38,13 @@ int		mouse_release(int button, int x, int y, void *param)
 {
 	t_fdf *p;
 
-	// (void)x;
-	// (void)y;
+	(void)x;
+	(void)y;
 	(void)button;
 	p = (t_fdf *)param;
 	p->mouse_key = -3;
-	p->mouse_x = x;
-	p->mouse_y = y;
+	// p->mouse_x = x;
+	// p->mouse_y = y;
 	
 	return (0);
 }

@@ -12,17 +12,16 @@ static void	zoom_x_y_plus(int key, t_fdf *p)
 			if (p->mouse_y > HIGHT /2)
 				p->y0 -= (KZ_MAX * (p->width - 1) * sin(ANGLE) / 2);
 		}
-		if (key == 24 || (key == 4 && p->mouse_x > WIDHT / 2))
+		if (key == 4 && p->mouse_x > WIDHT / 2)
 		{
-			// p->x0 -= (KZ_MAX * (p->hight - 1) * cos(ANGLE));
 			if (p->mouse_y < HIGHT /2)
 			{
-				p->x0 -= (KZ_MAX * (p->hight - 1) * cos(ANGLE));
-				p->y0 += (KZ_MAX * (p->width - 1) * sin(ANGLE) / 2);
+				p->x0 -= (KZ_MAX * (p->width + p->hight - 2) * cos(ANGLE));
+				// p->y0 -= (KZ_MAX * (p->width - 1) * sin(ANGLE));
 			}
 			if (p->mouse_y > HIGHT /2)
 			{
-				p->x0 -= (KZ_MAX * (p->width - 1) * cos(ANGLE));
+				p->x0 -= (KZ_MAX * (p->hight - 1) * cos(ANGLE));
 				p->y0 -= (KZ_MAX * (p->hight - 1) * sin(ANGLE));
 			}
 		}
@@ -43,7 +42,7 @@ static void	zoom_x_y_minus(int key, t_fdf *p)
 			if (p->mouse_y > HIGHT /2)
 				p->y0 += (KZ_MAX * (p->width - 1) * sin(ANGLE) / 2);
 		}
-		if (key == 27 || (key == 5 && p->mouse_x > WIDHT / 2))
+		if (key == 5 && p->mouse_x > WIDHT / 2)
 		{
 			if (p->mouse_y < HIGHT /2)
 			{
@@ -65,16 +64,16 @@ static void	zoom_x_y_minus(int key, t_fdf *p)
 		p->x0 += (KZ_MIN * (p->width + p->hight - 2) * cos(ANGLE) / 2);
 }
 
-void	zoom(int key, t_fdf *p)
+void	zoom_mouse(int key, t_fdf *p)
 {
-	if ((key == 24 || key == 4) && p->shift < WIDHT)
+	if (key == 4 && p->shift < WIDHT)
 	{
 			p->shift = (p->shift > KZ) ? p->shift + KZ_MAX : p->shift + KZ_MIN;
 			p->hgt = (p->shift > KZ) ? p->hgt * (1 + KZ_MAX / p->shift) : \
 			p->hgt * (1 + KZ_MIN / p->shift);
 			zoom_x_y_plus(key, p);
 	}
-	else if (key == 27 || key == 5)
+	else if (key == 5)
 	{
 		p->shift = (p->shift > KZ) ? p->shift - KZ_MAX : p->shift - KZ_MIN;
 		if (p->shift > 1)

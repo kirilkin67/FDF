@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 18:04:49 by wrhett            #+#    #+#             */
-/*   Updated: 2019/12/25 18:31:05 by wrhett           ###   ########.fr       */
+/*   Updated: 2019/12/30 13:30:42 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,27 +85,54 @@ static void	ft_drawing_hight_line_obl(t_fdf *p, double x0, double y0)
 	int	n;
 	int	m;
 
-	n = 0;
-	while (n < p->width)
+	n = p->width - 1;
+	while (n >= 0)
 	{
 		m = 0;
 		while (m < (p->hight - 1))
 		{
-			p->x1 = x0 + p->shift * cos(p->angle) * m;
+			p->x1 = x0 + p->shift * (cos(p->angle) * m + n);
 			p->y1 = y0 + p->shift * sin(p->angle) * m - \
 					p->coords[p->width * m + n] * p->hgt * cos(ANGLE1);
 			p->color1 = ft_get_point_colors(p, n, m);
-			p->x2 = x0 + p->shift * cos(p->angle) * (m + 1);
+			p->x2 = x0 + p->shift * (cos(p->angle) * (m + 1) + n);
 			p->y2 = y0 + p->shift * sin(p->angle) * (m + 1) \
 					- p->coords[p->width * (m + 1) + n] * p->hgt * cos(ANGLE1);
 			p->color2 = ft_get_point_colors(p, n, m + 1);
 			ft_drawing_line(p);
 			m += 1;
 		}
-		n += 1;
-		x0 += p->shift;
+		n -= 1;
+		// x0 += p->shift;
 	}
 }
+
+// static void	ft_drawing_hight_line_obl(t_fdf *p, double x0, double y0)
+// {
+// 	int	n;
+// 	int	m;
+
+// 	n = 0;
+// 	while (n < p->width)
+// 	{
+// 		m = 0;
+// 		while (m < (p->hight - 1))
+// 		{
+// 			p->x1 = x0 + p->shift * cos(p->angle) * m;
+// 			p->y1 = y0 + p->shift * sin(p->angle) * m - \
+// 					p->coords[p->width * m + n] * p->hgt * cos(ANGLE1);
+// 			p->color1 = ft_get_point_colors(p, n, m);
+// 			p->x2 = x0 + p->shift * cos(p->angle) * (m + 1);
+// 			p->y2 = y0 + p->shift * sin(p->angle) * (m + 1) \
+// 					- p->coords[p->width * (m + 1) + n] * p->hgt * cos(ANGLE1);
+// 			p->color2 = ft_get_point_colors(p, n, m + 1);
+// 			ft_drawing_line(p);
+// 			m += 1;
+// 		}
+// 		n += 1;
+// 		x0 += p->shift;
+// 	}
+// }
 
 void		ft_drawing_iso_obl(t_fdf *p)
 {

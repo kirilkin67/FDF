@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 17:19:43 by wrhett            #+#    #+#             */
-/*   Updated: 2019/12/27 12:47:35 by wrhett           ###   ########.fr       */
+/*   Updated: 2019/12/30 15:35:39 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define HIGHT	1200
 # define KZ	10
 # define KZ_MAX	1
-# define KZ_MIN	0.05
+# define KZ_MIN	0.5
 # define KH_MAX	0.5
 # define KH_MIN	0.1
 # define ANGLE	0.5235987755983
@@ -108,7 +108,8 @@ typedef struct	s_fdf
 }				t_fdf;
 
 int				close_endian(void *param);
-void			zoom(int key, t_fdf *p);
+void			zoom_key(int key, t_fdf *p);
+void			zoom_mouse(int key, t_fdf *p);
 void			look(int key, t_fdf *p);
 int				key_press(int key, void *param);
 int				mouse_press(int button, int x, int y, void *param);

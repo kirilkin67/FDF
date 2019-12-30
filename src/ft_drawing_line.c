@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/25 18:35:26 by wrhett            #+#    #+#             */
-/*   Updated: 2019/12/27 13:54:46 by wrhett           ###   ########.fr       */
+/*   Updated: 2019/12/30 14:09:28 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	ft_drawing_line(t_fdf *p)
 	p->sign_y = p->y1 < p->y2 ? 1 : -1;
 	p->error = p->deltax - p->deltay;
 	p->n = 0;
-	while (p->x1 != p->x2 || p->y1 != p->y2) // (p->n++ <= p->step)
+	while (p->n++ <= p->step) //(p->x1 != p->x2 || p->y1 != p->y2)
 	{
 		if (p->x1 >= 0 && p->x1 <= WIDHT - 1 && p->y1 >= 0 && p->y1 <= HIGHT - 1)
 			p->draw[p->x1 + p->y1 * WIDHT] = \
@@ -107,6 +107,6 @@ void	ft_drawing_line(t_fdf *p)
 			p->error += p->deltax;
 			p->y1 += p->sign_y;
 		}
-		p->n++;
+		// p->n++;
 	}
 }
