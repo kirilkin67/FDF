@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 17:18:18 by wrhett            #+#    #+#             */
-/*   Updated: 2019/12/30 12:44:56 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/01/04 14:29:14 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int			ft_get_color_2(int z_range, int n)
 	int		blue;
 	double	percent;
 
-	percent = (z_range == 0) ? 1 : (n / z_range);
+	percent = (z_range == 0) ? 1 : ((double)n / (double)z_range);
 	red = get_light((COLOR1 >> 16) & 0xFF, (COLOR2 >> 16) & 0xFF, percent);
 	green = get_light((COLOR1 >> 8) & 0xFF, (COLOR2 >> 8) & 0xFF, percent);
 	blue = get_light(COLOR1 & 0xFF, COLOR2 & 0xFF, percent);

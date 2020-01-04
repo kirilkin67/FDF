@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 17:19:43 by wrhett            #+#    #+#             */
-/*   Updated: 2019/12/30 15:35:39 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/01/04 14:26:51 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ t_map			*ft_map_init_2(t_map *map);
 double			min_shift(t_fdf *p);
 double			min_shift_oblique(t_fdf *p);
 int				ft_get_color(int color1, int color2, int step, int n);
-int				ft_get_color_2(int z_max, int n);
+int				ft_get_color_2(int z_range, int n);
 int				ft_get_point_colors(t_fdf *p, int n, int m);
 void			ft_drawing_line(t_fdf *p);
 void			ft_drawing_fon(t_fdf *p);
