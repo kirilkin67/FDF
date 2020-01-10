@@ -6,7 +6,7 @@
 #    By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/08 15:16:11 by wrhett            #+#    #+#              #
-#    Updated: 2019/12/20 12:15:33 by wrhett           ###   ########.fr        #
+#    Updated: 2020/01/05 13:06:07 by wrhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,7 @@ SRC = ft_memset.c \
 		ft_lstadd.c \
 		ft_lstiter.c \
 		ft_lstmap.c \
-		get_next_line.c \
+		get_next_line.c get_next_line_list.c\
 
 OBJECTS = $(patsubst %.c, %.o, $(SRC))
 

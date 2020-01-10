@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 17:17:57 by wrhett            #+#    #+#             */
-/*   Updated: 2019/12/30 15:38:04 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/01/10 16:45:32 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,28 +48,55 @@ static void	shift(int key, t_fdf *p)
 		ft_drawing_iso_obl(p);
 }
 
+static void	coordinate_x_start(t_fdf *p, int key)
+{
+	if (key == 24)
+	{
+		if (p->shift > KZ && p->flag == 0)
+			p->x0 -= KZ_MAX * (p->width + p->hight - 2) * cos(p->angle) * 0.5;
+		if (p->shift > KZ && p->flag == 1)
+			p->x0 -= KZ_MAX * (p->width - 1 + (p->hight - 1) * sin(p->angle)) * 0.5;
+		if (p->shift < KZ && p->flag == 0)
+			p->x0 -= KZ_MIN * (p->width + p->hight - 2) * cos(p->angle) * 0.5;
+		if (p->shift < KZ && p->flag == 1)
+			p->x0 -= KZ_MIN * (p->width - 1 + (p->hight - 1) * sin(p->angle)) * 0.5;
+	}
+	else if (key == 27)
+	{
+		if (p->shift > KZ && p->flag == 0)
+			p->x0 += KZ_MAX * (p->width + p->hight - 2) * cos(p->angle) * 0.5;
+		if (p->shift > KZ && p->flag == 1)
+			p->x0 += KZ_MAX * (p->width - 1 + (p->hight - 1) * sin(p->angle)) * 0.5;
+		if (p->shift < KZ && p->flag == 0)
+			p->x0 += KZ_MIN * (p->width + p->hight - 2) * cos(p->angle) * 0.5;
+		if (p->shift < KZ && p->flag == 1)
+			p->x0 += KZ_MIN * (p->width - 1 + (p->hight - 1) * sin(p->angle)) * 0.5;
+	}
+}
+
 void	zoom_key(int key, t_fdf *p)
 {
 	if (key == 24 && p->shift < WIDHT)
 	{
-			p->shift = (p->shift > KZ) ? p->shift + KZ_MAX : p->shift + KZ_MIN;
-			p->hgt = (p->shift > KZ) ? p->hgt * (1 + KZ_MAX / p->shift) : \
-			p->hgt * (1 + KZ_MIN / p->shift);
+		coordinate_x_start(p, key);
+		p->shift = (p->shift > KZ) ? p->shift + KZ_MAX : p->shift + KZ_MIN;
+		p->hgt = (p->shift > KZ) ? p->hgt * (1 + KZ_MAX / p->shift) : \
+		p->hgt * (1 + KZ_MIN / p->shift);
 	}
 	else if (key == 27)
 	{
-		p->shift = (p->shift > KZ) ? p->shift - KZ_MAX : p->shift - KZ_MIN;
 		if (p->shift > 1)
+		{
+			coordinate_x_start(p, key);
+			p->shift = (p->shift > KZ) ? p->shift - KZ_MAX : p->shift - KZ_MIN;
 			p->hgt = (p->shift > KZ) ? p->hgt * (1 - KZ_MAX / p->shift) : \
 			p->hgt * (1 - KZ_MIN / p->shift);
+		}
 		else if (p->shift < 1)
 			p->hgt *= 1;
 	}
 	if (p->shift < 1)
 		p->shift = 1;
-	p->x0 = (p->flag == 0) ? (WIDHT - p->shift * (p->width + p->hight - 2) * \
-	cos(p->angle)) / 2 : (WIDHT - p->shift * (p->width - 1 + (p->hight - 1) * \
-	sin(p->angle))) / 2;
 	p->flag == 0 ? ft_drawing_iso(p) : ft_drawing_iso_obl(p);
 }
 

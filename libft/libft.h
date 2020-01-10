@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 15:28:38 by wrhett            #+#    #+#             */
-/*   Updated: 2019/10/17 15:17:47 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/01/05 12:57:37 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <string.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# define BUFF_SIZE 120
+# define MAX_FD 4096
 
 typedef struct		s_list
 {

@@ -6,26 +6,20 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 11:32:51 by wrhett            #+#    #+#             */
-/*   Updated: 2019/10/08 15:31:28 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/01/05 12:57:01 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#define BUFF_SIZE 90
-#define MAX_FD 4096
 
 static size_t	ft_lenchr(char *str)
 {
 	size_t index;
 
 	index = 0;
-	while (str[index] != '\0')
-	{
-		if (str[index] == '\n')
-			return (index);
+	while (str[index] != '\n')
 		index += 1;
-	}
-	return (0);
+	return (index);
 }
 
 static char		*get_next_line_read(const int fd, char *str)

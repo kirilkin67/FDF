@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_list.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 15:45:43 by wrhett            #+#    #+#             */
-/*   Updated: 2019/10/16 16:42:24 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/01/05 13:01:14 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#define BUFF_SIZE 150
 
 static size_t	ft_lenchr(char *str)
 {
 	size_t index;
 
 	index = 0;
-	while (str[index] != '\0')
-	{
-		if (str[index] == '\n')
-			return (index);
+	while (str[index] != '\n')
 		index += 1;
-	}
-	return (0);
+	return (index);
 }
 
 static char		*get_next_line_read(const int fd, char *str)

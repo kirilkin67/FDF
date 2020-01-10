@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 17:19:43 by wrhett            #+#    #+#             */
-/*   Updated: 2020/01/04 14:26:51 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/01/10 16:53:39 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define HIGHT	1200
 # define KZ	10
 # define KZ_MAX	1
-# define KZ_MIN	0.5
+# define KZ_MIN	0.1
 # define KH_MAX	0.5
 # define KH_MIN	0.1
 # define ANGLE	0.5235987755983
@@ -85,6 +85,8 @@ typedef struct	s_fdf
 	int			mouse_key;
 	int			mouse_x;
 	int			mouse_y;
+	double		alfa_x;
+	double		alfa_y;
 	double		angle;
 	double		k_look;
 	double		shift;

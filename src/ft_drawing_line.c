@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/25 18:35:26 by wrhett            #+#    #+#             */
-/*   Updated: 2020/01/03 14:38:40 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/01/10 13:02:33 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 // 		n += 1;
 // 	}
 // }
+
 /* Function Bresenham's line algorithm on the int*/
 
 // void	ft_drawing_line(t_fdf *p)

@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 18:03:40 by wrhett            #+#    #+#             */
-/*   Updated: 2019/12/30 15:46:02 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/01/10 18:01:58 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int		mouse_press(int button, int x, int y, void *param)
 		p->mouse_y = y;
 		zoom_mouse(button, p);
 	}
-	else if (button == 1 && (y >= 0 && y <= (HIGHT - 1)) && (x >= 0 && y <= (WIDHT - 1)))
+	else if (button == 1 && (y >= 0 && y <= (HIGHT - 1)) && \
+			(x >= 0 && y <= (WIDHT - 1)))
 		p->mouse_key = 1;
 	return (0);
 }
@@ -43,9 +44,6 @@ int		mouse_release(int button, int x, int y, void *param)
 	(void)button;
 	p = (t_fdf *)param;
 	p->mouse_key = -3;
-	// p->mouse_x = x;
-	// p->mouse_y = y;
-	
 	return (0);
 }
 
