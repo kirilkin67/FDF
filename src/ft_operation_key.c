@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 17:17:57 by wrhett            #+#    #+#             */
-/*   Updated: 2020/01/10 16:45:32 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/01/15 19:57:02 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ static void	height(int key, t_fdf *p)
 static void	shift(int key, t_fdf *p)
 {
 	if (key == 123)
-		p->x0 -= 5;
+		p->x0 -= 10;
 	else if (key == 124)
-		p->x0 += 5;
+		p->x0 += 10;
 	else if (key == 125)
-		p->y0 += 5;
+		p->y0 += 10;
 	else if (key == 126)
-		p->y0 -= 5;
+		p->y0 -= 10;
 	if (p->x0 < -(p->width + p->hight - 2) * p->shift * cos(p->angle))
-		p->x0 = WIDHT;
-	if (p->x0 > WIDHT)
+		p->x0 = (WIDHT - 1);
+	if (p->x0 > (WIDHT - 1))
 		p->x0 = -(p->width + p->hight - 2) * p->shift * cos(p->angle);
 	if (p->y0 + p->hight * p->shift * sin(p->angle) < 1)
 		p->y0 = HIGHT + p->width * p->shift * sin(p->angle);
@@ -50,28 +50,16 @@ static void	shift(int key, t_fdf *p)
 
 static void	coordinate_x_start(t_fdf *p, int key)
 {
-	if (key == 24)
-	{
-		if (p->shift > KZ && p->flag == 0)
-			p->x0 -= KZ_MAX * (p->width + p->hight - 2) * cos(p->angle) * 0.5;
-		if (p->shift > KZ && p->flag == 1)
-			p->x0 -= KZ_MAX * (p->width - 1 + (p->hight - 1) * sin(p->angle)) * 0.5;
-		if (p->shift < KZ && p->flag == 0)
-			p->x0 -= KZ_MIN * (p->width + p->hight - 2) * cos(p->angle) * 0.5;
-		if (p->shift < KZ && p->flag == 1)
-			p->x0 -= KZ_MIN * (p->width - 1 + (p->hight - 1) * sin(p->angle)) * 0.5;
-	}
-	else if (key == 27)
-	{
-		if (p->shift > KZ && p->flag == 0)
-			p->x0 += KZ_MAX * (p->width + p->hight - 2) * cos(p->angle) * 0.5;
-		if (p->shift > KZ && p->flag == 1)
-			p->x0 += KZ_MAX * (p->width - 1 + (p->hight - 1) * sin(p->angle)) * 0.5;
-		if (p->shift < KZ && p->flag == 0)
-			p->x0 += KZ_MIN * (p->width + p->hight - 2) * cos(p->angle) * 0.5;
-		if (p->shift < KZ && p->flag == 1)
-			p->x0 += KZ_MIN * (p->width - 1 + (p->hight - 1) * sin(p->angle)) * 0.5;
-	}
+	double k_zoom;
+	
+	k_zoom = (p->shift > KZ) ? KZ_MAX : KZ_MIN;
+	if (key == 24) 
+		k_zoom *= -1;
+	if (p->flag == 0)
+		p->x0 += k_zoom * (p->width + p->hight - 2) * cos(p->angle) * 0.5;
+	if (p->flag == 1)
+		// p->x0 += k_zoom * (p->width - 1 + (p->hight - 1) * sin(p->angle)) * 0.5;
+		p->x0 += k_zoom * (p->width - 1) * 0.5;
 }
 
 void	zoom_key(int key, t_fdf *p)
@@ -102,14 +90,21 @@ void	zoom_key(int key, t_fdf *p)
 
 void	look(int key, t_fdf *p)
 {
-	if (key == 6)
-		p->k_look += K_LOOK;
-	else if (key == 7)
-		p->k_look -= K_LOOK;
-	p->angle = ANGLE - p->k_look;
-	p->x0 = (p->flag == 0) ? (WIDHT - p->shift * (p->width + p->hight - 2) * \
-	cos(p->angle)) / 2 : (WIDHT - p->shift * (p->width - 1 + (p->hight - 1) * \
-	cos(p->angle))) / 2;
+	if (key == NUM_KEY_8)
+		p->angle_x += K_LOOK;
+	else if (key == NUM_KEY_2)
+		p->angle_x -= K_LOOK;
+	else if (key == 83)
+		p->angle_y -= K_LOOK;
+	else if (key == 85)
+		p->angle_y += K_LOOK;
+	else if (key == NUM_KEY_4)
+		p->angle_z += K_LOOK;
+	else if (key == NUM_KEY_6)
+		p->angle_z -= K_LOOK;
+	// p->x0 = (p->flag == 0) ? (WIDHT - p->shift * (p->width + p->hight - 2) * \
+	// cos(p->angle)) / 2 : (WIDHT - p->shift * (p->width - 1 + (p->hight - 1) * \
+	// cos(p->angle))) / 2;
 	p->flag == 0 ? ft_drawing_iso(p) : ft_drawing_iso_obl(p);
 }
 
@@ -126,7 +121,8 @@ int			key_press(int key, void *param)
 		height(key, p);
 	if (key == 125 || key == 126 || key == 123 || key == 124)
 		shift(key, p);
-	if (key == 6 || key == 7)
+	if (key == 84 || key == 91 || key == NUM_KEY_4 || key == NUM_KEY_6 \
+		|| key == 83 || key == 85)
 		look(key, p); 
 	if (key == 34)
 	{

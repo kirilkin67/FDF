@@ -6,31 +6,19 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 18:04:49 by wrhett            #+#    #+#             */
-/*   Updated: 2019/12/30 13:30:42 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/01/15 20:53:38 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-// double		min_shift_oblique(t_fdf *p) // первая версия
-// {
-// 	double	shift;
-
-// 	shift = WIDHT / (p->width + p->hight * sin(p->angle));
-// 	if ((shift * (p->hight - 1) * sin(p->angle) + p->z_max * shift) > HIGHT)
-// 		shift = HIGHT / ((p->hight - 1) * sin(p->angle) + p->z_range + 2);
-// 	if (shift < 1)
-// 		shift = 1;
-// 	return (shift);
-// }
-
 double		min_shift_oblique(t_fdf *p)
 {
 	double	shift;
 
-	shift = WIDHT / (p->width + 1 + (p->hight + 1) * sin(p->angle));
-	if (shift * (p->hight - 1) * sin(p->angle) > HIGHT)
-		shift = HIGHT / ((p->hight + 1) * sin(p->angle));
+	shift = WIDHT / (p->width + 1);
+	if (shift * (p->hight - 1) > HIGHT)
+		shift = HIGHT / (p->hight + 1);
 	if (shift < 1)
 		shift = 1;
 	return (shift);
@@ -40,17 +28,78 @@ void		ft_parametr_iso_obl(t_fdf *p)
 {
 	p->flag = 1;
 	p->angle = ANGLE1;
+	p->angle_x = 0;
+	p->angle_y = 0;
+	p->angle_z = 0;
 	p->shift = min_shift_oblique(p);
 	if (p->z_range != 0)
-		p->hgt = ABS((HIGHT - (p->hight - 1) * p->shift * \
-				sin(p->angle))/ p->z_range);
-	p->x0 = (WIDHT - p->shift * (p->width - 1 + (p->hight - 1) * \
-			sin(p->angle))) / 2;
-	if (p->z_range == 0)
-		p->y0 = (HIGHT - (p->hight - 1) * p->shift * sin(p->angle)) / 2;
-	else
-		p->y0 = (p->z_max > p->z_min) ? p->hgt * (p->z_max - 1) : \
-		HIGHT - (p->z_min * p->hgt + p->hight * sin(p->angle));
+		p->hgt = ABS((HIGHT - (p->hight - 1) * p->shift)/ p->z_range);
+	p->x0 = (WIDHT - (p->width - 1 ) * p->shift) / 2;
+	// if (p->z_range == 0)
+		p->y0 = (HIGHT - (p->hight - 1) * p->shift) / 2;
+	// else
+	// 	p->y0 = (p->z_max > p->z_min) ? p->hgt * (p->z_max - 1) : \
+	// 	HIGHT - (p->z_min * p->hgt);
+}
+
+static double	high_obl(t_fdf *p, int x, int y)
+{
+	double z;
+
+	z = p->coords[p->width * y + x] * p->hgt;
+	return (z);
+}
+
+static void	rotation_x(t_fdf *p)
+{
+	double y1;
+	double y2;
+	double z1;
+	double z2;
+
+	y1 = p->y1;
+	z1 = p->z1;
+	y2 = p->y2;
+	z2 = p->z2;
+	p->y1 = y1 * cos(p->angle_x) + z1 * sin(p->angle_x);
+	p->z1 = -y1 * sin(p->angle_x) + z1 * cos(p->angle_x);
+	p->y2 = y2 * cos(p->angle_x) + z2 * sin(p->angle_x);
+	p->z2 = -y2 * sin(p->angle_x) + z2 * cos(p->angle_x);
+}
+
+static void	rotation_y(t_fdf *p)
+{
+	double x1;
+	double x2;
+	double z1;
+	double z2;
+
+	x1 = p->x1;
+	z1 = p->z1;
+	x2 = p->x2;
+	z2 = p->z2;
+	p->x1 = x1 * cos(p->angle_y) + z1 * sin(p->angle_y);
+	p->z1 = -x1 * sin(p->angle_y) + z1 * cos(p->angle_y);
+	p->x2 = x2 * cos(p->angle_y) + z2 * sin(p->angle_y);
+	p->z2 = -x2 * sin(p->angle_y) + z2 * cos(p->angle_y);
+}
+
+static void	rotation_z(t_fdf *p)
+{
+	double x1;
+	double x2;
+	double y1;
+	double y2;
+	
+	x1 = p->x1;
+	y1 = p->y1;
+	x2 = p->x2;
+	y2 = p->y2;
+	
+	p->x1 = p->x0 + (x1 * cos(p->angle_z) - y1 * sin(p->angle_z));
+	p->y1 = p->y0 + (x1 * sin(p->angle_z) + y1 * cos(p->angle_z));
+	p->x2 = p->x0 + (x2 * cos(p->angle_z) - y2 * sin(p->angle_z));
+	p->y2 = p->y0 + (x2 * sin(p->angle_z) + y2 * cos(p->angle_z));
 }
 
 
@@ -65,18 +114,21 @@ static void	ft_drawing_width_line_obl(t_fdf *p, double x0, double y0)
 		n = 0;
 		while (n < (p->width - 1))
 		{
-			p->x1 = x0 + p->shift * n;
-			p->y1 = y0 - p->coords[m * p->width + n] * p->hgt * cos(ANGLE1);
+			p->z1 = high_obl(p, n, m);
+			p->x1 = p->shift * n;
+			p->y1 = p->shift * m;
 			p->color1 = ft_get_point_colors(p, n, m);
-			p->x2 = x0 + p->shift * (n + 1);
-			p->y2 = y0 - p->coords[m * p->width + n + 1] * p->hgt * cos(ANGLE1);
+			p->z2 = high_obl(p, n + 1, m);
+			p->x2 = p->shift * (n + 1);
+			p->y2 = p->shift * m;
 			p->color2 = ft_get_point_colors(p, n + 1, m);
+			rotation_x(p);
+			rotation_y(p);
+			rotation_z(p);
 			ft_drawing_line(p);
 			n += 1;
 		}
 		m += 1;
-		x0 += p->shift * cos(p->angle);
-		y0 += p->shift * sin(p->angle);
 	}
 }
 
@@ -85,54 +137,29 @@ static void	ft_drawing_hight_line_obl(t_fdf *p, double x0, double y0)
 	int	n;
 	int	m;
 
-	n = p->width - 1;
-	while (n >= 0)
+	n = 0;
+	while (n < p->width)
 	{
 		m = 0;
 		while (m < (p->hight - 1))
 		{
-			p->x1 = x0 + p->shift * (cos(p->angle) * m + n);
-			p->y1 = y0 + p->shift * sin(p->angle) * m - \
-					p->coords[p->width * m + n] * p->hgt * cos(ANGLE1);
+			p->z1 = high_obl(p, n, m);
+			p->x1 = p->shift * n;
+			p->y1 = p->shift * m;
 			p->color1 = ft_get_point_colors(p, n, m);
-			p->x2 = x0 + p->shift * (cos(p->angle) * (m + 1) + n);
-			p->y2 = y0 + p->shift * sin(p->angle) * (m + 1) \
-					- p->coords[p->width * (m + 1) + n] * p->hgt * cos(ANGLE1);
+			p->z2 = high_obl(p, n, m + 1);
+			p->x2 = p->shift * n;
+			p->y2 = p->shift * (m + 1);
 			p->color2 = ft_get_point_colors(p, n, m + 1);
+			rotation_x(p);
+			rotation_y(p);
+			rotation_z(p);
 			ft_drawing_line(p);
 			m += 1;
 		}
-		n -= 1;
-		// x0 += p->shift;
+		n += 1;
 	}
 }
-
-// static void	ft_drawing_hight_line_obl(t_fdf *p, double x0, double y0)
-// {
-// 	int	n;
-// 	int	m;
-
-// 	n = 0;
-// 	while (n < p->width)
-// 	{
-// 		m = 0;
-// 		while (m < (p->hight - 1))
-// 		{
-// 			p->x1 = x0 + p->shift * cos(p->angle) * m;
-// 			p->y1 = y0 + p->shift * sin(p->angle) * m - \
-// 					p->coords[p->width * m + n] * p->hgt * cos(ANGLE1);
-// 			p->color1 = ft_get_point_colors(p, n, m);
-// 			p->x2 = x0 + p->shift * cos(p->angle) * (m + 1);
-// 			p->y2 = y0 + p->shift * sin(p->angle) * (m + 1) \
-// 					- p->coords[p->width * (m + 1) + n] * p->hgt * cos(ANGLE1);
-// 			p->color2 = ft_get_point_colors(p, n, m + 1);
-// 			ft_drawing_line(p);
-// 			m += 1;
-// 		}
-// 		n += 1;
-// 		x0 += p->shift;
-// 	}
-// }
 
 void		ft_drawing_iso_obl(t_fdf *p)
 {

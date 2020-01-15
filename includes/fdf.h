@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 17:19:43 by wrhett            #+#    #+#             */
-/*   Updated: 2020/01/10 16:53:39 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/01/15 20:01:47 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,17 @@
 # define KZ_MIN	0.1
 # define KH_MAX	0.5
 # define KH_MIN	0.1
-# define ANGLE	0.5235987755983
-# define ANGLE1	0.785398
+// # define ANGLE	0.5235987755983
+# define ANGLE	0.785398
+// # define ANGLE1	0.785398
+# define ANGLE1	1.57079632
 # define K_LOOK 0.087266462599716
 # define COLOR1	0x800080
 # define COLOR2	0xFFFFFF
+# define NUM_KEY_2	91
+# define NUM_KEY_4	86
+# define NUM_KEY_6	88
+# define NUM_KEY_8	84
 # define STR1	"zoom + or - "
 # define STR2	"shift -> or <- UP or DOWN"
 # define STR3	"heigt + or -"
@@ -88,11 +94,15 @@ typedef struct	s_fdf
 	double		alfa_x;
 	double		alfa_y;
 	double		angle;
-	double		k_look;
+	double		angle_x;
+	double		angle_y;
+	double		angle_z;
 	double		shift;
 	double		hgt;
 	double		x0;
 	double		y0;
+	double		z1;
+	double		z2;
 	int			x1;
 	int			y1;
 	int			x2;
@@ -114,9 +124,9 @@ void			zoom_key(int key, t_fdf *p);
 void			zoom_mouse(int key, t_fdf *p);
 void			look(int key, t_fdf *p);
 int				key_press(int key, void *param);
-int				mouse_press(int button, int x, int y, void *param);
+int				mouse_press(int button, int x, int y, t_fdf *p);
 int				mouse_release(int button, int x, int y, void *param);
-int				mouse_movement(int x, int y, void *param);
+int				mouse_movement(int x, int y, t_fdf *p);
 void			ft_exit(char *str);
 t_bool			ft_isnumber(char *str, int base);
 int				ft_atoi_base(const char *str, int base);

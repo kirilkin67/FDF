@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 18:03:40 by wrhett            #+#    #+#             */
-/*   Updated: 2020/01/10 18:01:58 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/01/15 12:48:05 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,8 @@ int		close_endian(void *param)
 	exit(0);
 }
 
-int		mouse_press(int button, int x, int y, void *param)
+int		mouse_press(int button, int x, int y, t_fdf *p)
 {
-	t_fdf *p;
-
-	p = (t_fdf *)param;
 	if (button == 4 || button == 5) // колесико scrol UP +, scroll DOWN -
 	{
 		p->mouse_x = x;
@@ -47,13 +44,11 @@ int		mouse_release(int button, int x, int y, void *param)
 	return (0);
 }
 
-int		mouse_movement(int x, int y, void *param)
+int		mouse_movement(int x, int y, t_fdf *p)
 {
-	t_fdf	*p;
 	int		x1;
 	int		y1;
 
-	p = (t_fdf *)param;
 	x1 = p->mouse_x;
 	y1 = p->mouse_y;
 	p->mouse_x = x;

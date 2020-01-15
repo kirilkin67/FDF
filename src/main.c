@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 17:56:28 by wrhett            #+#    #+#             */
-/*   Updated: 2019/12/26 12:26:02 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/01/14 18:27:21 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static void	copy_map_data(t_fdf *p, t_map *map)
 	p->z_min = map->z_min;
 	p->z_max = map->z_max;
 	p->z_range = map->z_range;
-	p->k_look = 0;
 	p->mouse_key = -3;
 }
 
