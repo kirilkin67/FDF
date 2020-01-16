@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 16:16:55 by wrhett            #+#    #+#             */
-/*   Updated: 2020/01/15 20:05:10 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/01/16 18:28:03 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,13 @@ void	ft_parametr_iso(t_fdf *p)
 		p->y0 = (p->width - 1) * p->shift * sin(p->angle) + p->hgt * p->z_max;
 }
 
-static double	high(t_fdf *p, int x, int y)
-{
-	double z;
+// static double	high(t_fdf *p, int x, int y)
+// {
+// 	double z;
 
-	z = p->coords[p->width * y + x] * p->hgt;
-	return (z);
-}
+// 	z = p->coords[p->width * y + x] * p->hgt;
+// 	return (z);
+// }
 
 static void	rotation_x(t_fdf *p)
 {
@@ -109,10 +109,14 @@ static void	rotation_z(t_fdf *p)
 	y2 = p->y2;
 	
 	p->x1 = p->x0 + (x1 * cos(p->angle_z) - y1 * sin(p->angle_z));
-	p->y1 = p->y0 - (x1 * sin(p->angle_z) + y1 * cos(p->angle_z));// - p->z1;
+	p->y1 = p->y0 - (x1 * sin(p->angle_z) + y1 * cos(p->angle_z)) - p->z1;
 	p->x2 = p->x0 + (x2 * cos(p->angle_z) - y2 * sin(p->angle_z));
-	p->y2 = p->y0 - (x2 * sin(p->angle_z) + y2 * cos(p->angle_z));// - p->z2;
+	p->y2 = p->y0 - (x2 * sin(p->angle_z) + y2 * cos(p->angle_z)) - p->z2;
 }
+
+
+
+
 
 static void	ft_drawing_width_line(t_fdf *p)
 {
@@ -125,11 +129,11 @@ static void	ft_drawing_width_line(t_fdf *p)
 		x = 0;
 		while (x < (p->width - 1))
 		{
-			p->z1 = high(p, x, y);
+			p->z1 = point_height(p, x, y);
 			p->x1 = p->shift * cos(p->angle) * (x + y);
 			p->y1 = p->shift * sin(p->angle) * (x - y);
 			p->color1 = ft_get_point_colors(p, x, y);
-			p->z2 = high(p, x + 1, y);
+			p->z2 = point_height(p, x + 1, y);
 			p->x2 = p->shift * cos(p->angle) * (x + y + 1);
 			p->y2 = p->shift * sin(p->angle) * (x - y + 1);
 			p->color2 = ft_get_point_colors(p, x + 1, y);
@@ -154,13 +158,13 @@ static void	ft_drawing_hight_line(t_fdf *p)
 		y = 0;
 		while (y < (p->hight - 1))
 		{
-			p->z1 = high(p, x, y);
+			p->z1 = point_height(p, x, y);
 			p->x1 = p->shift * cos(p->angle) * (x + y);
 			p->y1 = p->shift * sin(p->angle) * (x - y);
 			p->color1 = ft_get_point_colors(p, x, y);
-			p->z2 = high(p, x, y + 1);
+			p->z2 = point_height(p, x, y + 1);
 			p->x2 = p->shift * cos(p->angle) * (x + y + 1);
-			p->y2 = p->shift * sin(p->angle) * (x - y - 1);
+			p->y2 = p->shift * sin(p->angle) * (x - (y + 1));
 			p->color2 = ft_get_point_colors(p, x, y + 1);
 			rotation_x(p);
 			rotation_y(p);

@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 17:19:43 by wrhett            #+#    #+#             */
-/*   Updated: 2020/01/15 20:01:47 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/01/16 18:32:33 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,18 @@
 // # define ERR_FDF_INIT		"FdF initialization error. Error"
 // # define ERR_CONV_TO_ARR	"Conversion to array"
 # define ABS(Value) (Value > 0 ? Value : -Value)
-# define WIDHT	1500
+# define WIDHT	1900
 # define HIGHT	1200
 # define KZ	10
 # define KZ_MAX	1
 # define KZ_MIN	0.1
-# define KH_MAX	0.5
+# define KH_MAX	1
 # define KH_MIN	0.1
-// # define ANGLE	0.5235987755983
-# define ANGLE	0.785398
+# define ANGLE	0.5235987755983
+// # define ANGLE	0.785398
 // # define ANGLE1	0.785398
 # define ANGLE1	1.57079632
-# define K_LOOK 0.087266462599716
+# define K_ROT 0.087266463
 # define COLOR1	0x800080
 # define COLOR2	0xFFFFFF
 # define NUM_KEY_2	91
@@ -51,13 +51,25 @@
 # define STR2	"shift -> or <- UP or DOWN"
 # define STR3	"heigt + or -"
 # define STR4	"Isometric view - key I"
-# define STR5	"Oblique isometric view - key O"
+# define STR5	"Parallel view - key O"
+# define STR6	"rotation NUM LOK"
 
 typedef enum
 {
 	false,
 	true
 }	t_bool;
+
+typedef struct	s_dot
+{
+	double		x;
+	double		y;
+	double		z;
+	int			color;
+	double		x1;
+	double		y1;
+	double		z1;
+}				t_dot;
 
 typedef struct	s_map
 {
@@ -136,15 +148,18 @@ t_map			*ft_map_init(void);
 t_map			*ft_map_init_2(t_map *map);
 double			min_shift(t_fdf *p);
 double			min_shift_oblique(t_fdf *p);
+double			point_height(t_fdf *p, int x, int y);
 int				ft_get_color(int color1, int color2, int step, int n);
 int				ft_get_color_2(int z_range, int n);
 int				ft_get_point_colors(t_fdf *p, int n, int m);
 void			ft_drawing_line(t_fdf *p);
+void			ft_drawing_line_dot(t_fdf *p, t_dot *dot1, t_dot *dot2);
 void			ft_drawing_fon(t_fdf *p);
 void			ft_parametr_iso(t_fdf *p);
 void			ft_drawing_iso(t_fdf *p);
 void			ft_parametr_iso_obl(t_fdf *p);
 void			ft_drawing_iso_obl(t_fdf *p);
+void			ft_rotation_obl(t_fdf *p);
 void			ft_operation_key(t_fdf *p);
 void			ft_operation_mouse(t_fdf *p);
 

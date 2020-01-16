@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 17:17:57 by wrhett            #+#    #+#             */
-/*   Updated: 2020/01/15 19:57:02 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/01/16 19:12:45 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,8 @@ static void	coordinate_x_start(t_fdf *p, int key)
 		k_zoom *= -1;
 	if (p->flag == 0)
 		p->x0 += k_zoom * (p->width + p->hight - 2) * cos(p->angle) * 0.5;
-	if (p->flag == 1)
-		// p->x0 += k_zoom * (p->width - 1 + (p->hight - 1) * sin(p->angle)) * 0.5;
-		p->x0 += k_zoom * (p->width - 1) * 0.5;
+	// if (p->flag == 1)
+	// 	p->x0 += k_zoom * (p->width - 1) * 0.5;
 }
 
 void	zoom_key(int key, t_fdf *p)
@@ -91,17 +90,17 @@ void	zoom_key(int key, t_fdf *p)
 void	look(int key, t_fdf *p)
 {
 	if (key == NUM_KEY_8)
-		p->angle_x += K_LOOK;
+		p->angle_x += K_ROT;
 	else if (key == NUM_KEY_2)
-		p->angle_x -= K_LOOK;
+		p->angle_x -= K_ROT;
 	else if (key == 83)
-		p->angle_y -= K_LOOK;
+		p->angle_y += K_ROT;
 	else if (key == 85)
-		p->angle_y += K_LOOK;
+		p->angle_y -= K_ROT;
 	else if (key == NUM_KEY_4)
-		p->angle_z += K_LOOK;
+		p->angle_z += K_ROT;
 	else if (key == NUM_KEY_6)
-		p->angle_z -= K_LOOK;
+		p->angle_z -= K_ROT;
 	// p->x0 = (p->flag == 0) ? (WIDHT - p->shift * (p->width + p->hight - 2) * \
 	// cos(p->angle)) / 2 : (WIDHT - p->shift * (p->width - 1 + (p->hight - 1) * \
 	// cos(p->angle))) / 2;

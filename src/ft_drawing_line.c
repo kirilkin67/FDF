@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/25 18:35:26 by wrhett            #+#    #+#             */
-/*   Updated: 2020/01/15 20:02:25 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/01/16 11:27:36 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,34 @@ void	ft_drawing_line(t_fdf *p)
 			p->y1 += p->sign_y;
 		}
 		p->n++;
+	}
+}
+
+void	ft_drawing_line_dot(t_fdf *p, t_dot *dot1, t_dot *dot2)
+{
+	t_dot	tmp;
+	double	deltax;
+	double	deltay;
+	int		color;
+	int		step;
+	int		n;
+  
+	deltax = dot2->x - dot1->x;
+	deltay = dot2->y - dot1->y;
+	step =(ABS(deltax) >= ABS(deltay)) ? ABS(deltax) : ABS(deltay);
+	deltax = deltax / step;
+	deltay = deltay / step;
+	tmp.x = dot1->x;
+	tmp.y = dot1->y;
+	n = 0;
+	while(n <= step)
+	{
+		color = ft_get_color(dot1->color, dot2->color, step, n);
+		if ((int)tmp.x >= 0 && (int)tmp.x <= (WIDHT - 2) \
+			&& (int)tmp.y >= 0 && (int)tmp.y <= (HIGHT - 2))
+			p->draw[(int)round(tmp.x) + (int)round(tmp.y) * WIDHT] = color;
+		tmp.x += deltax;
+		tmp.y += deltay;
+		n += 1;
 	}
 }

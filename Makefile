@@ -6,7 +6,7 @@
 #    By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/12 17:31:15 by wrhett            #+#    #+#              #
-#    Updated: 2020/01/11 14:08:06 by wrhett           ###   ########.fr        #
+#    Updated: 2020/01/16 18:16:44 by wrhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CC = gcc
 SRC_DIR = ./src/
 SRC_LIST = main.c ft_atoi_base.c ft_get_color.c ft_get_map.c ft_read_map.c \
 	ft_operation_zoom.c ft_operation_key.c ft_operation_mouse.c \
-	ft_drawing_line.c ft_drawing_iso.c ft_drawing_iso_obl.c
+	ft_drawing_line.c ft_drawing_iso.c ft_drawing_iso_obl.c ft_rotation.c
 SRC = $(addprefix $(SRC_DIR), $(SRC_LIST))
 
 OBJECTS_DIR = ./objects/
@@ -33,7 +33,7 @@ LIBFT_DIR = ./libft/
 
 MLX = -L minilibx -lmlx -framework OpenGL -framework AppKit
 
-#FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 
 .PHONY: all clean fclean re
 
