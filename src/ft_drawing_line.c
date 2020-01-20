@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/25 18:35:26 by wrhett            #+#    #+#             */
-/*   Updated: 2020/01/18 20:09:23 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/01/20 20:02:30 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* Function Digital Differential Analyzer on the double in header*/
 
-// void		ft_drawing_line(t_fdf *p) 
+// void		ft_drawing_line(t_fdf *p)
 // {
 // 	double	deltax;
 // 	double	deltay;
@@ -68,12 +68,12 @@
 // 			&& (int)p->y1 >= 0 && (int)p->y1 <= (HIGHT - 1))
 // 			p->draw[(int)p->x1 + (int)p->y1 * WIDHT] = color;
 // 		error2 = error * 2;
-// 		if (error2 > -deltay) 
+// 		if (error2 > -deltay)
 // 		{
 // 			error -= deltay;
 // 			p->x1 += sign_x;
 // 		}
-// 		if (error2 < deltax) 
+// 		if (error2 < deltax)
 // 		{
 // 			error += deltax;
 // 			p->y1 += sign_y;
@@ -125,23 +125,22 @@ void	ft_drawing_line_dot(t_fdf *p, t_dot *dot1, t_dot *dot2)
 	double	deltax;
 	double	deltay;
 	double	step;
-	int		color;
 	int		n;
-  
+
 	deltax = dot2->x - dot1->x;
 	deltay = dot2->y - dot1->y;
-	step =(ABS(deltax) >= ABS(deltay)) ? ABS(deltax) : ABS(deltay);
+	step = (ABS(deltax) >= ABS(deltay)) ? ABS(deltax) : ABS(deltay);
 	deltax = deltax / step;
 	deltay = deltay / step;
 	tmp.x = dot1->x;
 	tmp.y = dot1->y;
 	n = 0;
-	while(n <= step)
+	while (n <= step)
 	{
-		color = ft_get_color(dot1->color, dot2->color, step, n);
+		tmp.color = ft_get_color(dot1->color, dot2->color, step, n);
 		if ((int)tmp.x >= 0 && (int)tmp.x <= (WIDHT - 2) \
 			&& (int)tmp.y >= 0 && (int)tmp.y <= (HIGHT - 2))
-			p->draw[(int)round(tmp.x) + (int)round(tmp.y) * WIDHT] = color;
+			p->draw[(int)round(tmp.x) + (int)round(tmp.y) * WIDHT] = tmp.color;
 		tmp.x += deltax;
 		tmp.y += deltay;
 		n += 1;
