@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 18:03:40 by wrhett            #+#    #+#             */
-/*   Updated: 2020/01/15 12:48:05 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/01/20 16:34:05 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,7 @@ int		mouse_movement(int x, int y, t_fdf *p)
 	{
 		p->x0 += (x - x1);
 		p->y0 += (y - y1);
-		if (p->flag == 0 && p->mouse_key == 1)
-			ft_drawing_iso(p);
-		if (p->flag == 1 && p->mouse_key == 1)
+		if (p->mouse_key == 1)
 			ft_drawing_iso_obl(p);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/25 18:35:26 by wrhett            #+#    #+#             */
-/*   Updated: 2020/01/16 11:27:36 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/01/18 20:09:23 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,33 +82,40 @@
 // 	}
 // }
 
-
-void	ft_drawing_line(t_fdf *p)
+static void	drawing_data(t_fdf *p, t_draw *data)
 {
-	p->deltax = ABS((p->x2 - p->x1));
-	p->deltay = ABS((p->y2 - p->y1));
-	p->step = (p->deltax >= p->deltay) ? p->deltax : p->deltay;
-	p->sign_x = p->x1 < p->x2 ? 1 : -1;
-	p->sign_y = p->y1 < p->y2 ? 1 : -1;
-	p->error = p->deltax - p->deltay;
-	p->n = 0;
-	while (p->x1 != p->x2 || p->y1 != p->y2) //(p->n++ <= p->step)
+	data->deltax = ABS((p->x2 - p->x1));
+	data->deltay = ABS((p->y2 - p->y1));
+	data->step = (data->deltax >= data->deltay) ? data->deltax : data->deltay;
+	data->sign_x = p->x1 < p->x2 ? 1 : -1;
+	data->sign_y = p->y1 < p->y2 ? 1 : -1;
+	data->error = data->deltax - data->deltay;
+}
+
+void		ft_drawing_line(t_fdf *p)
+{
+	t_draw data;
+
+	drawing_data(p, &data);
+	data.n = 0;
+	while (p->x1 != p->x2 || p->y1 != p->y2)
 	{
-		if (p->x1 >= 0 && p->x1 <= (WIDHT - 1) && p->y1 >= 0 && p->y1 <= (HIGHT - 1))
+		if (p->x1 >= 0 && p->x1 <= (WIDHT - 1) && p->y1 >= 0 && \
+			p->y1 <= (HIGHT - 1))
 			p->draw[p->x1 + p->y1 * WIDHT] = \
-			ft_get_color(p->color1, p->color2, p->step, p->n);
-		p->error2 = p->error * 2;
-		if (p->error2 > -p->deltay)
+			ft_get_color(p->color1, p->color2, data.step, data.n);
+		data.error2 = data.error * 2;
+		if (data.error2 > -data.deltay)
 		{
-			p->error -= p->deltay;
-			p->x1 += p->sign_x;
+			data.error -= data.deltay;
+			p->x1 += data.sign_x;
 		}
-		if (p->error2 < p->deltax)
+		if (data.error2 < data.deltax)
 		{
-			p->error += p->deltax;
-			p->y1 += p->sign_y;
+			data.error += data.deltax;
+			p->y1 += data.sign_y;
 		}
-		p->n++;
+		data.n += 1;
 	}
 }
 
@@ -117,8 +124,8 @@ void	ft_drawing_line_dot(t_fdf *p, t_dot *dot1, t_dot *dot2)
 	t_dot	tmp;
 	double	deltax;
 	double	deltay;
+	double	step;
 	int		color;
-	int		step;
 	int		n;
   
 	deltax = dot2->x - dot1->x;

@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 17:56:28 by wrhett            #+#    #+#             */
-/*   Updated: 2020/01/14 18:27:21 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/01/20 14:38:58 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	ft_initialize_mlx(t_fdf *p)
 	(int *)mlx_get_data_addr(p->img_ptr, &p->bpp, &p->size_line, &p->endian);
 	ft_operation(p);
 	ft_parametr_iso(p);
-	ft_drawing_iso(p);
+	ft_drawing_iso_obl(p);
 	mlx_loop(p->mlx_ptr);
 }
 

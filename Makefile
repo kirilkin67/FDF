@@ -6,7 +6,7 @@
 #    By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/12 17:31:15 by wrhett            #+#    #+#              #
-#    Updated: 2020/01/16 18:16:44 by wrhett           ###   ########.fr        #
+#    Updated: 2020/01/18 19:21:17 by wrhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ LIBFT_DIR = ./libft/
 
 MLX = -L minilibx -lmlx -framework OpenGL -framework AppKit
 
-FLAGS = -Wall -Wextra -Werror
+#FLAGS = -Wall -Wextra -Werror
 
 .PHONY: all clean fclean re
 

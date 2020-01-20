@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 17:19:43 by wrhett            #+#    #+#             */
-/*   Updated: 2020/01/16 18:32:33 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/01/20 16:05:29 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,19 @@
 # include <mlx.h>
 # include "../libft/libft.h"
 # include "error.h"
-// # define ERR_USAGE			"Usage: (1 map file) ./fdf <filename>"
-// # define ERR_MAP			"Incorrect filename. Error"
-// # define ERR_MAP_READING	"Reading error"
-// # define ERR_MAP_INIT		"Map initialization error"
-// # define ERR_FILE			"Incorrect file. Wrong line length. Exit"
-// # define ERR_FDF_INIT		"FdF initialization error. Error"
-// # define ERR_CONV_TO_ARR	"Conversion to array"
+# include "manual.h"
 # define ABS(Value) (Value > 0 ? Value : -Value)
 # define WIDHT	1900
 # define HIGHT	1200
+# define K_SHIFT	10
 # define KZ	10
 # define KZ_MAX	1
 # define KZ_MIN	0.1
 # define KH_MAX	1
 # define KH_MIN	0.1
 # define ANGLE	0.5235987755983
-// # define ANGLE	0.785398
-// # define ANGLE1	0.785398
-# define ANGLE1	1.57079632
+# define ANGLE1	0.785398
+// # define ANGLE1	1.57079632
 # define K_ROT 0.087266463
 # define COLOR1	0x800080
 # define COLOR2	0xFFFFFF
@@ -47,12 +41,6 @@
 # define NUM_KEY_4	86
 # define NUM_KEY_6	88
 # define NUM_KEY_8	84
-# define STR1	"zoom + or - "
-# define STR2	"shift -> or <- UP or DOWN"
-# define STR3	"heigt + or -"
-# define STR4	"Isometric view - key I"
-# define STR5	"Parallel view - key O"
-# define STR6	"rotation NUM LOK"
 
 typedef enum
 {
@@ -70,6 +58,18 @@ typedef struct	s_dot
 	double		y1;
 	double		z1;
 }				t_dot;
+
+typedef struct	s_draw
+{
+	int			deltax;
+	int			deltay;
+	int			sign_x;
+	int			sign_y;
+	int			error;
+	int			error2;
+	int			step;
+	int			n;
+}				t_draw;
 
 typedef struct	s_map
 {
@@ -119,13 +119,6 @@ typedef struct	s_fdf
 	int			y1;
 	int			x2;
 	int			y2;
-	int			deltax;
-	int			deltay;
-	int			sign_x;
-	int			sign_y;
-	int			error;
-	int			error2;
-	int 		step;
 	int			flag;
 	int			n;
 
@@ -159,7 +152,8 @@ void			ft_parametr_iso(t_fdf *p);
 void			ft_drawing_iso(t_fdf *p);
 void			ft_parametr_iso_obl(t_fdf *p);
 void			ft_drawing_iso_obl(t_fdf *p);
-void			ft_rotation_obl(t_fdf *p);
+void			ft_rotation(t_fdf *p);
+void			ft_rotation_dot(t_fdf *p, t_dot *dot);
 void			ft_operation_key(t_fdf *p);
 void			ft_operation_mouse(t_fdf *p);
 

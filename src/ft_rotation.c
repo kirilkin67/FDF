@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 18:07:17 by wrhett            #+#    #+#             */
-/*   Updated: 2020/01/16 18:26:23 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/01/20 18:46:29 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,25 @@ double	point_height(t_fdf *p, int x, int y)
 	return (z);
 }
 
-void	ft_rotation_obl(t_fdf *p)
+void	ft_rotation_dot(t_fdf *p, t_dot *dot)
+{
+	int x;
+	int y;
+
+	y = dot->y;
+	dot->y = y * cos(p->angle_x) + dot->z * sin(p->angle_x);
+	dot->z = -y * sin(p->angle_x) + dot->z * cos(p->angle_x);
+	x = dot->x;
+	dot->x = x * cos(p->angle_y) + dot->z * sin(p->angle_y);
+	dot->z = -x * sin(p->angle_y) + dot->z * cos(p->angle_y);
+	x = dot->x;
+	dot->x = x * cos(p->angle_z) - dot->y * sin(p->angle_z);
+	dot->y = x * sin(p->angle_z) + dot->y * cos(p->angle_z);
+	dot->x = p->x0 + dot->x;
+	dot->y = p->y0 + dot->y;
+}
+
+void	ft_rotation(t_fdf *p)
 {
 	t_dot	dot1;
 	t_dot	dot2;

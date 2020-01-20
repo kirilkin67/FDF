@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 17:17:57 by wrhett            #+#    #+#             */
-/*   Updated: 2020/01/16 19:12:45 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/01/20 18:15:27 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,73 +18,48 @@ static void	height(int key, t_fdf *p)
 		p->hgt = (p->shift > KZ) ? p->hgt + KH_MAX : p->hgt + KH_MIN;
 	else if (key == 78)
 		p->hgt = (p->shift > KZ) ? p->hgt - KH_MAX : p->hgt - KH_MIN;
-	if (p->flag == 0)
-		ft_drawing_iso(p);
-	else if (p->flag == 1)
 		ft_drawing_iso_obl(p);
+}
+
+static void	coordinate_x_y_shift(int flag, t_fdf *p)
+{
+	if (flag == 1)
+	{
+		if (p->x0 < (-(p->width - 1) * p->shift / 2))
+			p->x0 = (WIDHT + (p->width - 1) * p->shift / 2);
+		if (p->x0 > (WIDHT + (p->width - 1) * p->shift / 2))
+			p->x0 = -(p->width - 1) * p->shift / 2;
+		if (p->y0 < (-(p->hight - 1) * p->shift / 2))
+			p->y0 = (HIGHT + (p->hight - 1) * p->shift / 2);
+		if (p->y0 > (HIGHT + (p->hight - 1) * p->shift / 2))
+			p->y0 = -(p->hight - 1) * p->shift / 2;
+	}
+	if (flag == 0)
+	{
+		if (p->x0 < -(p->width + p->hight - 2) * p->shift * cos(p->angle) / 2)
+			p->x0 = WIDHT + (p->width + p->hight - 2) * p->shift * cos(p->angle) / 2;
+		if (p->x0 > (WIDHT + (p->width + p->hight - 2) * p->shift * cos(p->angle) / 2))
+			p->x0 = -(p->width + p->hight - 2) * p->shift * cos(p->angle) / 2;
+		if (p->y0 < -(p->width + p->hight - 2) * p->shift * sin(p->angle) / 2)
+			p->y0 = HIGHT + (p->width + p->hight - 2) * p->shift * sin(p->angle) / 2;
+		if (p->y0 > (HIGHT + (p->width + p->hight - 2) * p->shift * sin(p->angle) / 2))
+			p->y0 = -(p->width + p->hight - 2) * p->shift * sin(p->angle) / 2;
+	}
 }
 
 static void	shift(int key, t_fdf *p)
 {
 	if (key == 123)
-		p->x0 -= 10;
+		p->x0 -= K_SHIFT;
 	else if (key == 124)
-		p->x0 += 10;
+		p->x0 += K_SHIFT;
 	else if (key == 125)
-		p->y0 += 10;
+		p->y0 += K_SHIFT;
 	else if (key == 126)
-		p->y0 -= 10;
-	if (p->x0 < -(p->width + p->hight - 2) * p->shift * cos(p->angle))
-		p->x0 = (WIDHT - 1);
-	if (p->x0 > (WIDHT - 1))
-		p->x0 = -(p->width + p->hight - 2) * p->shift * cos(p->angle);
-	if (p->y0 + p->hight * p->shift * sin(p->angle) < 1)
-		p->y0 = HIGHT + p->width * p->shift * sin(p->angle);
-	if (p->y0 - p->width * p->shift * sin(p->angle) > HIGHT)
-		p->y0 = -p->hight * p->shift * sin(p->angle);
-	if (p->flag == 0)
-		ft_drawing_iso(p);
-	else if (p->flag == 1)
-		ft_drawing_iso_obl(p);
-}
-
-static void	coordinate_x_start(t_fdf *p, int key)
-{
-	double k_zoom;
-	
-	k_zoom = (p->shift > KZ) ? KZ_MAX : KZ_MIN;
-	if (key == 24) 
-		k_zoom *= -1;
-	if (p->flag == 0)
-		p->x0 += k_zoom * (p->width + p->hight - 2) * cos(p->angle) * 0.5;
-	// if (p->flag == 1)
-	// 	p->x0 += k_zoom * (p->width - 1) * 0.5;
-}
-
-void	zoom_key(int key, t_fdf *p)
-{
-	if (key == 24 && p->shift < WIDHT)
-	{
-		coordinate_x_start(p, key);
-		p->shift = (p->shift > KZ) ? p->shift + KZ_MAX : p->shift + KZ_MIN;
-		p->hgt = (p->shift > KZ) ? p->hgt * (1 + KZ_MAX / p->shift) : \
-		p->hgt * (1 + KZ_MIN / p->shift);
-	}
-	else if (key == 27)
-	{
-		if (p->shift > 1)
-		{
-			coordinate_x_start(p, key);
-			p->shift = (p->shift > KZ) ? p->shift - KZ_MAX : p->shift - KZ_MIN;
-			p->hgt = (p->shift > KZ) ? p->hgt * (1 - KZ_MAX / p->shift) : \
-			p->hgt * (1 - KZ_MIN / p->shift);
-		}
-		else if (p->shift < 1)
-			p->hgt *= 1;
-	}
-	if (p->shift < 1)
-		p->shift = 1;
-	p->flag == 0 ? ft_drawing_iso(p) : ft_drawing_iso_obl(p);
+		p->y0 -= K_SHIFT;
+	if (p->flag == 1 || p->flag == 0)
+		coordinate_x_y_shift(p->flag, p);
+	ft_drawing_iso_obl(p);
 }
 
 void	look(int key, t_fdf *p)
@@ -101,10 +76,7 @@ void	look(int key, t_fdf *p)
 		p->angle_z += K_ROT;
 	else if (key == NUM_KEY_6)
 		p->angle_z -= K_ROT;
-	// p->x0 = (p->flag == 0) ? (WIDHT - p->shift * (p->width + p->hight - 2) * \
-	// cos(p->angle)) / 2 : (WIDHT - p->shift * (p->width - 1 + (p->hight - 1) * \
-	// cos(p->angle))) / 2;
-	p->flag == 0 ? ft_drawing_iso(p) : ft_drawing_iso_obl(p);
+	ft_drawing_iso_obl(p);
 }
 
 int			key_press(int key, void *param)
@@ -124,14 +96,9 @@ int			key_press(int key, void *param)
 		|| key == 83 || key == 85)
 		look(key, p); 
 	if (key == 34)
-	{
 		ft_parametr_iso(p);
-		ft_drawing_iso(p);
-	}
 	if (key == 31)
-	{
 		ft_parametr_iso_obl(p);
-		ft_drawing_iso_obl(p);
-	}
+	ft_drawing_iso_obl(p);
 	return (0);
 }
