@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 17:19:43 by wrhett            #+#    #+#             */
-/*   Updated: 2020/01/20 16:05:29 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/01/21 18:30:29 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@
 # define ANGLE1	0.785398
 // # define ANGLE1	1.57079632
 # define K_ROT 0.087266463
-# define COLOR1	0x800080
+# define COLOR1	0x008000 // green 0x800080
 # define COLOR2	0xFFFFFF
+# define COLOR3	0x00FFFF // ligt blue
+# define COLOR4	0xFF
 # define NUM_KEY_2	91
 # define NUM_KEY_4	86
 # define NUM_KEY_6	88
@@ -143,7 +145,6 @@ double			min_shift(t_fdf *p);
 double			min_shift_oblique(t_fdf *p);
 double			point_height(t_fdf *p, int x, int y);
 int				ft_get_color(int color1, int color2, int step, int n);
-int				ft_get_color_2(int z_range, int n);
 int				ft_get_point_colors(t_fdf *p, int n, int m);
 void			ft_drawing_line(t_fdf *p);
 void			ft_drawing_line_dot(t_fdf *p, t_dot *dot1, t_dot *dot2);

@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 18:04:49 by wrhett            #+#    #+#             */
-/*   Updated: 2020/01/20 18:33:56 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/01/22 14:22:23 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void		ft_parametr_iso_obl(t_fdf *p)
 	p->angle_x = 0;
 	p->angle_y = 0;
 	p->angle_z = 0;
+	p->angle = 1.57079632;
 	p->shift = min_shift_oblique(p);
 	if (p->z_range != 0)
 		p->hgt = ABS((HIGHT - (p->hight - 1) * p->shift) / p->z_range);

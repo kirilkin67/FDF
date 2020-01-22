@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 18:03:40 by wrhett            #+#    #+#             */
-/*   Updated: 2020/01/20 16:34:05 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/01/22 13:38:46 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		mouse_press(int button, int x, int y, t_fdf *p)
 		zoom_mouse(button, p);
 	}
 	else if (button == 1 && (y >= 0 && y <= (HIGHT - 1)) && \
-			(x >= 0 && y <= (WIDHT - 1)))
+			(x >= 0 && x <= (WIDHT - 1)))
 		p->mouse_key = 1;
 	return (0);
 }
