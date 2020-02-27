@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 15:10:00 by wrhett            #+#    #+#             */
-/*   Updated: 2019/12/18 18:00:01 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/02/24 17:33:33 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,11 @@ t_bool			ft_isnumber(char *str, int base)
 	int			i;
 	size_t		digits;
 
+	if (str == NULL)
+		ft_exit(ERR_MAP_ATOI);
 	i = 0;
 	digits = 0;
-	while ((str[i] >= 9 && str[i] <= 13) && str[i] == 32)
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
 		i++;
 	if (base != 10 && !ft_has_prefix(&str[i], base))
 		return (false);

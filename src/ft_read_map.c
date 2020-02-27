@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 15:43:44 by wrhett            #+#    #+#             */
-/*   Updated: 2020/01/05 17:59:38 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/02/24 17:23:42 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ static void	new_coord_2(char *str, t_map *map)
 	if (!(parts = ft_strsplit(str, ',')))
 		ft_exit(ERR_MAP_READING);
 	if (!ft_isnumber(parts[0], 10))
-		ft_exit(ERR_MAP_READING);
+		ft_exit(ERR_MAP_INIT);
 	if (parts[1] && !ft_isnumber(parts[1], 16))
-		ft_exit(ERR_MAP_READING);
+		ft_exit(ERR_MAP_INIT);
 	z = ft_atoi(parts[0]);
 	color = parts[1] ? ft_atoi_base(parts[1], 16) : -1;
 	coord_to_arr(z, color, map);

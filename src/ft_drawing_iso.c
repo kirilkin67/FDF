@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 16:16:55 by wrhett            #+#    #+#             */
-/*   Updated: 2020/01/20 18:44:28 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/02/27 15:32:32 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,15 @@ double		min_shift(t_fdf *p)
 {
 	double	min_shift;
 
-	min_shift = WIDHT / (p->width + p->hight + 2) / cos(p->angle);
-	if (min_shift * (p->width + p->hight - 2) * sin(p->angle) >= HIGHT)
-		min_shift = HIGHT / (p->width + p->hight + 2) / sin(p->angle);
+	min_shift = (double)WIDHT / (double)(p->width + p->hight + 2) / cos(p->angle);
+	// printf("WIDTH %d\n", p->width);
+	// printf("HIGHT %d\n", p->hight);
+	// printf("M_SHIFT-1 %f\n", min_shift);
+	if (min_shift * (p->width + p->hight - 2) * sin(p->angle) >= (double)HIGHT)
+		min_shift = (double)HIGHT / (double)(p->width + p->hight + 2) / sin(p->angle);
 	if (min_shift < 1)
 		min_shift = 1;
+	// printf("M_SHIFT-2 %f\n", min_shift);
 	return (min_shift);
 }
 
@@ -32,16 +36,23 @@ void	ft_parametr_iso(t_fdf *p)
 	p->angle_z = -ANGLE;
 	p->angle = ANGLE;
 	p->shift = min_shift(p);
-	p->x0 = WIDHT / 2;
-	p->y0 = HIGHT / 2;
-	// p->x0 = (WIDHT - (p->width + p->hight - 2) * p->shift * cos(p->angle)) / 2;
+	p->x0 = (double)WIDHT / 2;
+	p->y0 = (double)HIGHT / 2;
 	if (p->z_range != 0)
-		p->hgt = ABS((HIGHT - (p->width + p->hight - 2) * p->shift * \
+		p->hgt = ABS(((double)HIGHT - (p->width + p->hight) * p->shift * \
 				sin(p->angle))/ p->z_range);
+	// printf("WIDTH %d\n", p->width);
+	// printf("HIGHT %d\n", p->hight);
+	// printf("Z_RANGE %d\n", p->z_range);
+	// printf("Z_MAX %d\n", p->z_max);
+	// printf("Z_MIN %d\n", p->z_min);
+	// printf("SHIFT %f\n", p->shift);
+	// printf("HGT %f\n", p->hgt);
+	// p->x0 = (WIDHT - (p->width + p->hight - 2) * p->shift * cos(p->angle)) / 2;
 	// if (p->z_range == 0)
-		// p->y0 = (HIGHT + ((p->width - p->hight) * p->shift * sin(p->angle))) / 2;
-	//else
-		// p->y0 = (p->width - 1) * p->shift * sin(p->angle) + p->hgt * p->z_max;
+	// 	p->y0 = (HIGHT + ((p->width - p->hight) * p->shift * sin(p->angle))) / 2;
+	// if (p->z_range != 0)
+	// 	p->y0 += p->hgt * p->z_max;
 }
 
 // static void	ft_drawing_width_line(t_fdf *p)

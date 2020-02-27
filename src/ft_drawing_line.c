@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/25 18:35:26 by wrhett            #+#    #+#             */
-/*   Updated: 2020/01/20 20:02:30 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/02/24 15:45:33 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,8 +138,8 @@ void	ft_drawing_line_dot(t_fdf *p, t_dot *dot1, t_dot *dot2)
 	while (n <= step)
 	{
 		tmp.color = ft_get_color(dot1->color, dot2->color, step, n);
-		if ((int)tmp.x >= 0 && (int)tmp.x <= (WIDHT - 2) \
-			&& (int)tmp.y >= 0 && (int)tmp.y <= (HIGHT - 2))
+		if ((int)round(tmp.x) >= 0 && (int)round(tmp.x) <= (WIDHT - 1) \
+			&& (int)round(tmp.y) >= 0 && (int)round(tmp.y) <= (HIGHT - 1))
 			p->draw[(int)round(tmp.x) + (int)round(tmp.y) * WIDHT] = tmp.color;
 		tmp.x += deltax;
 		tmp.y += deltay;

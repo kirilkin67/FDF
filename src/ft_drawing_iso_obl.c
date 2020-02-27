@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 18:04:49 by wrhett            #+#    #+#             */
-/*   Updated: 2020/01/22 14:22:23 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/02/27 15:30:41 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ double		min_shift_oblique(t_fdf *p)
 {
 	double	shift;
 
-	shift = WIDHT / (p->width + 1);
-	if (shift * (p->hight - 1) > HIGHT)
-		shift = HIGHT / (p->hight + 1);
+	shift = (double)WIDHT / (double)(p->width + 1);
+	if (shift * (p->hight - 1) > (double)HIGHT)
+		shift = (double)HIGHT / (double)(p->hight + 1);
 	if (shift < 1)
 		shift = 1;
 	return (shift);
@@ -87,9 +87,9 @@ void		ft_parametr_iso_obl(t_fdf *p)
 	p->angle = 1.57079632;
 	p->shift = min_shift_oblique(p);
 	if (p->z_range != 0)
-		p->hgt = ABS((HIGHT - (p->hight - 1) * p->shift) / p->z_range);
-	p->x0 = WIDHT / 2;
-	p->y0 = HIGHT / 2;
+		p->hgt = ABS(((double)HIGHT - (p->hight - 1) * p->shift) / (double)p->z_range);
+	p->x0 = (double)WIDHT / 2;
+	p->y0 = (double)HIGHT / 2;
 }
 
 void	ft_point_coordinates(t_fdf *p, t_dot *point, int x, int y)
@@ -161,8 +161,8 @@ void		ft_drawing_iso_obl(t_fdf *p)
 	ft_bzero(p->draw, WIDHT * HIGHT * 4);
 	// ft_drawing_hight_line_obl(p);
 	// ft_drawing_width_line_obl(p);
-	// ft_point_drawing(p);
-	ft_point_drawing_betta(p);
+	ft_point_drawing(p);
+	// ft_point_drawing_betta(p);
 	mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 0, 0);
 	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 20, 0xFFFFFF, STR1);
 	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 40, 0xFFFFFF, STR2);

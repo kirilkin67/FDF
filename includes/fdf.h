@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 17:19:43 by wrhett            #+#    #+#             */
-/*   Updated: 2020/01/21 18:30:29 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/02/27 15:06:16 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,16 @@
 # include "error.h"
 # include "manual.h"
 # define ABS(Value) (Value > 0 ? Value : -Value)
-# define WIDHT	1900
+# define WIDHT	1800
 # define HIGHT	1200
-# define K_SHIFT	10
-# define KZ	10
-# define KZ_MAX	1
+# define K_SHIFT	10.0
+# define KZ	10.0
+# define KZ_MAX	1.0
 # define KZ_MIN	0.1
-# define KH_MAX	1
+# define KH_MAX	1.0
 # define KH_MIN	0.1
 # define ANGLE	0.5235987755983
 # define ANGLE1	0.785398
-// # define ANGLE1	1.57079632
 # define K_ROT 0.087266463
 # define COLOR1	0x008000 // green 0x800080
 # define COLOR2	0xFFFFFF
@@ -155,7 +154,7 @@ void			ft_parametr_iso_obl(t_fdf *p);
 void			ft_drawing_iso_obl(t_fdf *p);
 void			ft_rotation(t_fdf *p);
 void			ft_rotation_dot(t_fdf *p, t_dot *dot);
-void			ft_operation_key(t_fdf *p);
-void			ft_operation_mouse(t_fdf *p);
+// void			ft_operation_key(t_fdf *p);
+// void			ft_operation_mouse(t_fdf *p);
 
 #endif
