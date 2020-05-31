@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 17:56:28 by wrhett            #+#    #+#             */
-/*   Updated: 2020/02/24 15:30:25 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/31 22:48:39 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void		ft_exit(char *str)
 
 void		ft_operation(t_fdf *p)
 {
-	mlx_hook(p->win_ptr, 2, 0, key_press, p);
+	mlx_hook(p->win_ptr, 2, (1L << 0), key_press, p);
 	mlx_hook(p->win_ptr, 17, 0, close_endian, p);
-	mlx_hook(p->win_ptr, 4, 0, mouse_press, p);
-	mlx_hook(p->win_ptr, 5, 0, mouse_release, p);
-	mlx_hook(p->win_ptr, 6, 0, mouse_movement, p);
+	mlx_hook(p->win_ptr, 4, (1L << 2), mouse_press, p);
+	mlx_hook(p->win_ptr, 5, (1L << 3), mouse_release, p);
+	mlx_hook(p->win_ptr, 6, (1L << 6), mouse_movement, p);
 }
 
 static void	ft_initialize_mlx(t_fdf *p)

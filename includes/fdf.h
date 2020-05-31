@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 17:19:43 by wrhett            #+#    #+#             */
-/*   Updated: 2020/02/27 15:06:16 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/31 22:43:53 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,18 @@
 # include <fcntl.h>
 # include <limits.h>
 # include <math.h>
-# include <mlx.h>
+# include "../minilibx/mlx.h"
 # include "../libft/libft.h"
 # include "error.h"
 # include "manual.h"
+# ifdef __linux__
+#  include "key_linux.h"
+# else
+#  include "key_macos.h"
+# endif
 # define ABS(Value) (Value > 0 ? Value : -Value)
-# define WIDHT	1800
-# define HIGHT	1200
+# define WIDHT	1200
+# define HIGHT	600
 # define K_SHIFT	10.0
 # define KZ	10.0
 # define KZ_MAX	1.0
@@ -38,10 +43,6 @@
 # define COLOR2	0xFFFFFF
 # define COLOR3	0x00FFFF // ligt blue
 # define COLOR4	0xFF
-# define NUM_KEY_2	91
-# define NUM_KEY_4	86
-# define NUM_KEY_6	88
-# define NUM_KEY_8	84
 
 typedef enum
 {
@@ -154,7 +155,7 @@ void			ft_parametr_iso_obl(t_fdf *p);
 void			ft_drawing_iso_obl(t_fdf *p);
 void			ft_rotation(t_fdf *p);
 void			ft_rotation_dot(t_fdf *p, t_dot *dot);
-// void			ft_operation_key(t_fdf *p);
-// void			ft_operation_mouse(t_fdf *p);
+void			ft_operation_key(t_fdf *p);
+void			ft_operation_mouse(t_fdf *p);
 
 #endif

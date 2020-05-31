@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+         #
+#    By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/12 17:31:15 by wrhett            #+#    #+#              #
-#    Updated: 2020/02/26 20:47:14 by wrhett           ###   ########.fr        #
+#    Updated: 2020/05/31 21:51:43 by wrhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ OBJECTS_LIST = $(patsubst %.c, %.o, $(SRC_LIST))
 OBJECTS = $(addprefix $(OBJECTS_DIR), $(OBJECTS_LIST))
 
 HEADER_DIR = ./includes/
-HEADER_LIST = fdf.h error.h manual.h
+HEADER_LIST = fdf.h error.h manual.h key_linux.h key_macos.h
 HEADER = $(addprefix $(HEADER_DIR), $(HEADER_LIST))
 
 INCLUDES = -I$(HEADER_DIR) -I$(LIBFT_DIR)
@@ -33,9 +33,10 @@ INCLUDES = -I$(HEADER_DIR) -I$(LIBFT_DIR)
 LIBFT = $(LIBFT_DIR)libft.a
 LIBFT_DIR = ./libft/
 
-MLX = -L minilibx -lmlx -framework OpenGL -framework AppKit
+#MLX = -L ./minilibx -lmlx -framework OpenGL -framework AppKit
+MLX = ./minilibx/libmlx.a -lXext -lX11 -lm
 
-#FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 
 .PHONY: all clean fclean re FAKE
 
@@ -51,7 +52,7 @@ $(OBJECTS_DIR):
 		@echo "\033[32m$(NAME): $(OBJECTS_DIR)directory was created\033[0m"
 
 $(OBJECTS_DIR)%.o: $(SRC_DIR)%.c $(HEADER)
-		$(CC) $(FLAGS) -I $(INCLUDES) -o $@ -c $<
+		@$(CC) $(FLAGS) $(INCLUDES) -o $@ -c $<
 
 $(LIBFT): FAKE
 		@$(MAKE) -C $(LIBFT_DIR)

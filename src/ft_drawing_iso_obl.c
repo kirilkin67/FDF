@@ -3,75 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_drawing_iso_obl.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 18:04:49 by wrhett            #+#    #+#             */
-/*   Updated: 2020/02/27 15:30:41 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/31 22:48:05 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-
-static void	ft_drawing_width_line_obl(t_fdf *p)
-{
-	int	n;
-	int	m;
-
-	m = 0;
-	while (m < p->hight)
-	{
-		n = 0;
-		while (n < (p->width - 1))
-		{
-			p->z1 = point_height(p, n, m);
-			p->x1 = p->shift * (n - p->width / 2);
-			p->y1 = p->shift * (m - p->hight / 2);
-			p->color1 = ft_get_point_colors(p, n, m);
-			p->z2 = point_height(p, n + 1, m);
-			p->x2 = p->shift * (n + 1 - p->width / 2);
-			p->y2 = p->shift * (m - p->hight / 2);
-			p->color2 = ft_get_point_colors(p, n + 1, m);
-			ft_rotation(p);
-			ft_drawing_line(p);
-			n += 1;
-		}
-		m += 1;
-	}
-}
-
-static void	ft_drawing_hight_line_obl(t_fdf *p)
-{
-	int	n;
-	int	m;
-
-	n = 0;
-	while (n < p->width)
-	{
-		m = 0;
-		while (m < (p->hight - 1))
-		{
-			p->z1 = point_height(p, n, m);
-			p->x1 = p->shift * (n - p->width / 2);
-			p->y1 = p->shift * (m - p->hight / 2);
-			p->color1 = ft_get_point_colors(p, n, m);
-			p->z2 = point_height(p, n, m + 1);
-			p->x2 = p->shift * (n - p->width / 2);
-			p->y2 = p->shift * (m + 1 - p->hight / 2);
-			p->color2 = ft_get_point_colors(p, n, m + 1);
-			ft_rotation(p);
-			ft_drawing_line(p);
-			m += 1;
-		}
-		n += 1;
-	}
-}
 
 double		min_shift_oblique(t_fdf *p)
 {
 	double	shift;
 
 	shift = (double)WIDHT / (double)(p->width + 1);
-	if (shift * (p->hight - 1) > (double)HIGHT)
+	if (shift * (p->hight + 1) >= (double)HIGHT)
 		shift = (double)HIGHT / (double)(p->hight + 1);
 	if (shift < 1)
 		shift = 1;
@@ -87,7 +33,13 @@ void		ft_parametr_iso_obl(t_fdf *p)
 	p->angle = 1.57079632;
 	p->shift = min_shift_oblique(p);
 	if (p->z_range != 0)
-		p->hgt = ABS(((double)HIGHT - (p->hight - 1) * p->shift) / (double)p->z_range);
+	{
+		// p->hgt = ABS(((double)HIGHT - (p->hight - 1) * p->shift) / p->z_range);
+		if (p->z_max >= -p->z_min && p->z_max != 0)
+			p->hgt = (HIGHT / 2.0 - p->shift) / p->z_max;
+		else
+			p->hgt = (HIGHT / 2.0 - p->shift) / -p->z_min;
+	}
 	p->x0 = (double)WIDHT / 2;
 	p->y0 = (double)HIGHT / 2;
 }
@@ -102,7 +54,7 @@ void	ft_point_coordinates(t_fdf *p, t_dot *point, int x, int y)
 	ft_rotation_dot(p, point);
 }
 
-void	ft_point_drawing(t_fdf *p)
+void	ft_point_drawing_betta(t_fdf *p)
 {
 	t_dot	dot1;
 	t_dot	dot2;
@@ -132,7 +84,7 @@ void	ft_point_drawing(t_fdf *p)
 	}
 }
 
-void	ft_point_drawing_betta(t_fdf *p)
+void	ft_point_drawing(t_fdf *p)
 {
 	t_dot	dot1;
 	t_dot	dot2;
@@ -159,8 +111,6 @@ void	ft_point_drawing_betta(t_fdf *p)
 void		ft_drawing_iso_obl(t_fdf *p)
 {
 	ft_bzero(p->draw, WIDHT * HIGHT * 4);
-	// ft_drawing_hight_line_obl(p);
-	// ft_drawing_width_line_obl(p);
 	ft_point_drawing(p);
 	// ft_point_drawing_betta(p);
 	mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 0, 0);

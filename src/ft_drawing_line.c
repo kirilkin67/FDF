@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_drawing_line.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/25 18:35:26 by wrhett            #+#    #+#             */
-/*   Updated: 2020/02/24 15:45:33 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/31 18:38:31 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 // 	while (n <= step)
 // 	{
 // 		color = ft_get_color(p->color1, p->color2, step, n);
-// 		if ((int)p->x1 >= 0 && (int)p->x1 <= (WIDHT - 2) \
+// 		if ((int)p->x1 >= 0 && (int)p->x1 <= (WIDHT - 2) 
 // 			&& (int)p->y1 >= 0 && (int)p->y1 <= (HIGHT - 2))
 // 			p->draw[(int)round(p->x1) + (int)round(p->y1) * WIDHT] = color;
 // 		p->x1 = p->x1 + deltax;
@@ -64,7 +64,7 @@
 // 	while (p->x1 <= p->x2 || p->y1 <= p->y2) //(n <= step)
 // 	{
 // 		color = ft_get_color(p->color1, p->color2, step, n);
-// 		if ((int)p->x1 >= 0 && (int)p->x1 <= (WIDHT - 1) \
+// 		if ((int)p->x1 >= 0 && (int)p->x1 <= (WIDHT - 1) 
 // 			&& (int)p->y1 >= 0 && (int)p->y1 <= (HIGHT - 1))
 // 			p->draw[(int)p->x1 + (int)p->y1 * WIDHT] = color;
 // 		error2 = error * 2;

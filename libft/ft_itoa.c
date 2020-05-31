@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 13:42:44 by wrhett            #+#    #+#             */
-/*   Updated: 2019/09/19 11:30:58 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/31 18:28:32 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_itoa(int n)
 	index = ft_lennumber(n);
 	if (!(str = ft_strnew(index)))
 		return (NULL);
-	num = (n < 0) ? (unsigned int)-n : n;
+	num = (n < 0) ? (unsigned int)-n : (unsigned int)n;
 	if (n < 0)
 		str[0] = '-';
 	while (num >= 10)

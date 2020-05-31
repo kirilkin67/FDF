@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+         #
+#    By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/08 15:16:11 by wrhett            #+#    #+#              #
-#    Updated: 2020/01/05 13:06:07 by wrhett           ###   ########.fr        #
+#    Updated: 2020/05/31 18:27:16 by wrhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,8 +85,8 @@ FLAGS = -Wall -Wextra -Werror
 
 all:	$(NAME)
 
-$(OBJECTS): %.o: %.c
-		@gcc $(FLAGS) -I $(HEADER_F) -o $@ -c $<
+$(OBJECTS): %.o: %.c $(HEADER_F)
+		gcc $(FLAGS) -o $@ -c $<
 
 $(NAME): $(OBJECTS)
 		@ar rc $@ $^

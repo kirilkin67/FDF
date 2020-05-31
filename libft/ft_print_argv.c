@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_argv.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 17:31:00 by wrhett            #+#    #+#             */
-/*   Updated: 2019/09/18 17:37:52 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/31 18:31:50 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_print_argv(char **argv)
 	int index;
 
 	n = 1;
-	while (argv[n] != '\0')
+	while (argv[n] != NULL)
 	{
 		index = 0;
 		while (argv[n][index] != '\0')

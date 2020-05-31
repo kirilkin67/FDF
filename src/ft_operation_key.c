@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_operation_key.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 17:17:57 by wrhett            #+#    #+#             */
-/*   Updated: 2020/01/20 18:15:27 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/31 22:03:56 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static void	height(int key, t_fdf *p)
 {
-	if (key == 69)
+	if (key == NUM_KEY_PLUS)
 		p->hgt = (p->shift > KZ) ? p->hgt + KH_MAX : p->hgt + KH_MIN;
-	else if (key == 78)
+	if (key == NUM_KEY_MINUS)
 		p->hgt = (p->shift > KZ) ? p->hgt - KH_MAX : p->hgt - KH_MIN;
-		ft_drawing_iso_obl(p);
+	ft_drawing_iso_obl(p);
 }
 
 static void	coordinate_x_y_shift(int flag, t_fdf *p)
@@ -49,13 +49,13 @@ static void	coordinate_x_y_shift(int flag, t_fdf *p)
 
 static void	shift(int key, t_fdf *p)
 {
-	if (key == 123)
+	if (key == KEY_LEFT)
 		p->x0 -= K_SHIFT;
-	else if (key == 124)
+	else if (key == KEY_RIGHT)
 		p->x0 += K_SHIFT;
-	else if (key == 125)
+	else if (key == KEY_UP)
 		p->y0 += K_SHIFT;
-	else if (key == 126)
+	else if (key == KEY_DOWN)
 		p->y0 -= K_SHIFT;
 	if (p->flag == 1 || p->flag == 0)
 		coordinate_x_y_shift(p->flag, p);
@@ -64,13 +64,13 @@ static void	shift(int key, t_fdf *p)
 
 void	look(int key, t_fdf *p)
 {
-	if (key == NUM_KEY_8)
+	if (key == NUM_KEY_2)
 		p->angle_x += K_ROT;
-	else if (key == NUM_KEY_2)
+	else if (key == NUM_KEY_8)
 		p->angle_x -= K_ROT;
-	else if (key == 83)
+	else if (key == NUM_KEY_1)
 		p->angle_y += K_ROT;
-	else if (key == 85)
+	else if (key == NUM_KEY_3)
 		p->angle_y -= K_ROT;
 	else if (key == NUM_KEY_4)
 		p->angle_z += K_ROT;
@@ -84,20 +84,20 @@ int			key_press(int key, void *param)
 	t_fdf *p;
 
 	p = (t_fdf *)param;
-	if (key == 53)
+	if (key == KEY_ESC)
 		exit(0);
-	if (key == 24 || key == 27)
+	if (key == KEY_PLUS || key == KEY_MINUS)
 		zoom_key(key, p);
-	if (key == 69 || key == 78)
+	if (key == NUM_KEY_PLUS || key == NUM_KEY_MINUS)
 		height(key, p);
-	if (key == 125 || key == 126 || key == 123 || key == 124)
+	if (key == KEY_UP || key == KEY_DOWN || key == KEY_RIGHT || key == KEY_LEFT)
 		shift(key, p);
-	if (key == 84 || key == 91 || key == NUM_KEY_4 || key == NUM_KEY_6 \
-		|| key == 83 || key == 85)
+	if (key == NUM_KEY_1 || key == NUM_KEY_2 || key == NUM_KEY_3 || 
+	key == NUM_KEY_4 || key == NUM_KEY_6 || key == NUM_KEY_8)
 		look(key, p); 
-	if (key == 34)
+	if (key == KEY_I)
 		ft_parametr_iso(p);
-	if (key == 31)
+	if (key == KEY_O)
 		ft_parametr_iso_obl(p);
 	ft_drawing_iso_obl(p);
 	return (0);

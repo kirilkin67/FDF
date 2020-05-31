@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sort_wordtab.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 17:11:23 by wrhett            #+#    #+#             */
-/*   Updated: 2019/09/18 17:26:40 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/31 18:30:50 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_sort_wordtab(char **tab)
 	size_t index;
 
 	index = 0;
-	while (*(tab + index) != '\0')
+	while (*(tab + index) != NULL)
 		index += 1;
 	index -= 1;
 	while (index > 0)
