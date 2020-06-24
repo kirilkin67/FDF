@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 17:19:43 by wrhett            #+#    #+#             */
-/*   Updated: 2020/05/31 22:43:53 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/06/24 16:31:45 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,22 @@
 #  include "key_macos.h"
 # endif
 # define ABS(Value) (Value > 0 ? Value : -Value)
-# define WIDHT	1200
-# define HIGHT	600
+# define WIDHT		1500
+# define HIGHT		1000
 # define K_SHIFT	10.0
-# define KZ	10.0
-# define KZ_MAX	1.0
-# define KZ_MIN	0.1
-# define KH_MAX	1.0
-# define KH_MIN	0.1
-# define ANGLE	0.5235987755983
-# define ANGLE1	0.785398
-# define K_ROT 0.087266463
-# define COLOR1	0x008000 // green 0x800080
-# define COLOR2	0xFFFFFF
-# define COLOR3	0x00FFFF // ligt blue
-# define COLOR4	0xFF
+# define KZ			10.0
+# define KZ_MAX		1.0
+# define KZ_MIN		0.1
+# define KH_MAX		1.0
+# define KH_MIN		0.1
+# define ANGLE		0.5235987755983
+# define ANGLE1		0.785398
+# define K_ROT		0.087266463
+# define COLOR_GR	0x008000
+# define COLOR_WH	0xFFFFFF
+# define COLOR_BLL	0x00FFFF
+# define COLOR_BL	0xFF
+# define COLOR_FON	0x8B8B83
 
 typedef enum
 {

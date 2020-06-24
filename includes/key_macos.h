@@ -45,10 +45,10 @@
 # define NUM_KEY_9		92
 # define NUM_KEY_PLUS	69
 # define NUM_KEY_MINUS	78
-// # define NUM_KEY_ENT	65421
-// # define NUM_KEY_POW	65450
-// # define NUM_KEY_DIV	65455
-// # define NUM_KEY_LOC	65407
+# define NUM_KEY_END	71
+# define NUM_KEY_EQV	81
+# define NUM_KEY_DIV	75
+# define NUM_KEY_POW	67
 # define NUM_KEY_DOT	65
 # define KEY_1			18
 # define KEY_2			19
@@ -60,6 +60,8 @@
 # define KEY_8			28
 # define KEY_9			25
 # define KEY_0			29
+# define KEY_MINUS		27
+# define KEY_PLUS		24
 # define F1				122
 # define F2				120
 # define F3				99

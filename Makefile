@@ -6,7 +6,7 @@
 #    By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/12 17:31:15 by wrhett            #+#    #+#              #
-#    Updated: 2020/05/31 21:51:43 by wrhett           ###   ########.fr        #
+#    Updated: 2020/06/24 16:30:39 by wrhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,13 @@ INCLUDES = -I$(HEADER_DIR) -I$(LIBFT_DIR)
 LIBFT = $(LIBFT_DIR)libft.a
 LIBFT_DIR = ./libft/
 
-#MLX = -L ./minilibx -lmlx -framework OpenGL -framework AppKit
-MLX = ./minilibx/libmlx.a -lXext -lX11 -lm
+ifeq ($(OS), Linux)
+	MLX_DIR = ./minilibx/
+	MLX = -L ./minilibx/ -lmlx -lXext -lX11 -lm -lpthread -lz
+else
+	MLX_DIR = ./minilibx_macos/
+	MLX = -L ./minilibx_macos/ -lmlx -framework OpenGL -framework AppKit
+endif
 
 FLAGS = -Wall -Wextra -Werror
 
@@ -56,6 +61,7 @@ $(OBJECTS_DIR)%.o: $(SRC_DIR)%.c $(HEADER)
 
 $(LIBFT): FAKE
 		@$(MAKE) -C $(LIBFT_DIR)
+		@$(MAKE) -C $(MLX_DIR)
 
 clean:
 		@rm -rf $(OBJECTS_DIR)

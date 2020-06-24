@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 18:04:49 by wrhett            #+#    #+#             */
-/*   Updated: 2020/05/31 22:48:05 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/06/24 17:34:13 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void		ft_parametr_iso_obl(t_fdf *p)
 	p->shift = min_shift_oblique(p);
 	if (p->z_range != 0)
 	{
-		// p->hgt = ABS(((double)HIGHT - (p->hight - 1) * p->shift) / p->z_range);
 		if (p->z_max >= -p->z_min && p->z_max != 0)
 			p->hgt = (HIGHT / 2.0 - p->shift) / p->z_max;
 		else
@@ -44,9 +43,8 @@ void		ft_parametr_iso_obl(t_fdf *p)
 	p->y0 = (double)HIGHT / 2;
 }
 
-void	ft_point_coordinates(t_fdf *p, t_dot *point, int x, int y)
+void		ft_point_coordinates(t_fdf *p, t_dot *point, int x, int y)
 {
-	
 	point->z = point_height(p, x, y);
 	point->x = p->shift * ((double)x - (double)(p->width - 1) / 2);
 	point->y = p->shift * ((double)y - (double)(p->hight - 1) / 2);
@@ -54,12 +52,12 @@ void	ft_point_coordinates(t_fdf *p, t_dot *point, int x, int y)
 	ft_rotation_dot(p, point);
 }
 
-void	ft_point_drawing_betta(t_fdf *p)
+void		ft_point_drawing_betta(t_fdf *p)
 {
 	t_dot	dot1;
 	t_dot	dot2;
-	int x;
-	int y;
+	int		x;
+	int		y;
 
 	y = 0;
 	while (y < (p->hight))
@@ -84,7 +82,7 @@ void	ft_point_drawing_betta(t_fdf *p)
 	}
 }
 
-void	ft_point_drawing(t_fdf *p)
+void		ft_point_drawing(t_fdf *p)
 {
 	t_dot	dot1;
 	t_dot	dot2;

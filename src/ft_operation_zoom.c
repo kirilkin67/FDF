@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 17:58:24 by wrhett            #+#    #+#             */
-/*   Updated: 2020/05/31 22:53:29 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/06/24 17:18:02 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	zoom_x_y(int key, t_fdf *p)
 	p->y0 -= k_zoom * (p->hight - 1) * p->alfa_y;
 }
 
-void	zoom_mouse(int key, t_fdf *p)
+void		zoom_mouse(int key, t_fdf *p)
 {
 	if (key == 4 && p->shift < WIDHT)
 	{
