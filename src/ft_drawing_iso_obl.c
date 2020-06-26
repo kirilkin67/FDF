@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 18:04:49 by wrhett            #+#    #+#             */
-/*   Updated: 2020/06/24 17:34:13 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/06/26 11:51:07 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void		ft_point_drawing_betta(t_fdf *p)
 	int		y;
 
 	y = 0;
-	while (y < (p->hight))
+	while (y < p->hight)
 	{
 		x = 0;
 		while (x < p->width)
@@ -110,15 +110,6 @@ void		ft_drawing_iso_obl(t_fdf *p)
 {
 	ft_bzero(p->draw, WIDHT * HIGHT * 4);
 	ft_point_drawing(p);
-	// ft_point_drawing_betta(p);
-	mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 0, 0);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 20, 0xFFFFFF, STR1);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 40, 0xFFFFFF, STR2);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 60, 0xFFFFFF, STR3);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 80, 0xFFFFFF, STR4);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 100, 0xFFFFFF, STR5);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 120, 0xFFFFFF, STR6);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 140, 0xFFFFFF, STR7);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 160, 0xFFFFFF, STR8);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 180, 0xFFFFFF, STR9);
+	ft_point_drawing_betta(p);
+	expose_hook(p);
 }

@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/25 18:35:26 by wrhett            #+#    #+#             */
-/*   Updated: 2020/06/24 17:13:25 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/06/26 11:33:56 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,4 +147,17 @@ void		ft_drawing_line_dot(t_fdf *p, t_dot *dot1, t_dot *dot2)
 		tmp.y += deltay;
 		n += 1;
 	}
+}
+
+void		print_instructions(t_fdf *p)
+{
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 20, 0xFFFFFF, STR1);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 40, 0xFFFFFF, STR2);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 60, 0xFFFFFF, STR3);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 80, 0xFFFFFF, STR4);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 100, 0xFFFFFF, STR5);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 120, 0xFFFFFF, STR6);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 140, 0xFFFFFF, STR7);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 160, 0xFFFFFF, STR8);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 180, 0xFFFFFF, STR9);
 }

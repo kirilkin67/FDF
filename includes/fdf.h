@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 17:19:43 by wrhett            #+#    #+#             */
-/*   Updated: 2020/06/24 16:31:45 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/06/26 11:48:02 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,6 @@ typedef struct	s_dot
 	double		y;
 	double		z;
 	int			color;
-	double		x1;
-	double		y1;
-	double		z1;
 }				t_dot;
 
 typedef struct	s_draw
@@ -136,6 +133,7 @@ int				mouse_press(int button, int x, int y, t_fdf *p);
 int				mouse_release(int button, int x, int y, void *param);
 int				mouse_movement(int x, int y, t_fdf *p);
 void			ft_exit(char *str);
+int				expose_hook(t_fdf *p);
 t_bool			ft_isnumber(char *str, int base);
 int				ft_atoi_base(const char *str, int base);
 int				ft_read_map_prev(const int fd, t_map *map);
@@ -158,5 +156,6 @@ void			ft_rotation(t_fdf *p);
 void			ft_rotation_dot(t_fdf *p, t_dot *dot);
 void			ft_operation_key(t_fdf *p);
 void			ft_operation_mouse(t_fdf *p);
+void			print_instructions(t_fdf *p);
 
 #endif

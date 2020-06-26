@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 18:03:40 by wrhett            #+#    #+#             */
-/*   Updated: 2020/06/24 17:24:04 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/06/26 11:20:49 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@ int		close_endian(void *param)
 {
 	(void)param;
 	exit(0);
+}
+
+int		expose_hook(t_fdf *p)
+{
+	mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 0, 0);
+	print_instructions(p);
+	return (1);
 }
 
 /*

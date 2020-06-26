@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 17:56:28 by wrhett            #+#    #+#             */
-/*   Updated: 2020/05/31 22:48:39 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/06/26 11:21:58 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void		ft_operation(t_fdf *p)
 	mlx_hook(p->win_ptr, 4, (1L << 2), mouse_press, p);
 	mlx_hook(p->win_ptr, 5, (1L << 3), mouse_release, p);
 	mlx_hook(p->win_ptr, 6, (1L << 6), mouse_movement, p);
+	mlx_hook(p->win_ptr, 12, (1L << 15), expose_hook, p);
 }
 
 static void	ft_initialize_mlx(t_fdf *p)
