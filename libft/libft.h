@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 15:28:38 by wrhett            #+#    #+#             */
-/*   Updated: 2020/01/05 12:57:37 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/08/07 12:06:19 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ typedef struct		s_list
 typedef struct		s_node
 {
 	char			*str;
-	int 			discriptor;
-	struct s_node   *next;
-}					fd_list;
+	int				discriptor;
+	struct s_node	*next;
+}					t_fd_list;
 
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_list.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 15:45:43 by wrhett            #+#    #+#             */
-/*   Updated: 2020/01/05 13:01:14 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/08/07 12:08:40 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_lenchr(char *str)
+static size_t		ft_lenchr(char *str)
 {
 	size_t index;
 
@@ -22,7 +22,7 @@ static size_t	ft_lenchr(char *str)
 	return (index);
 }
 
-static char		*get_next_line_read(const int fd, char *str)
+static char			*get_next_line_read(const int fd, char *str)
 {
 	char		bufer[BUFF_SIZE + 1];
 	char		*tmp;
@@ -45,11 +45,11 @@ static char		*get_next_line_read(const int fd, char *str)
 	return (str);
 }
 
-static fd_list	*lst_create(char *str, int fd)
+static t_fd_list	*lst_create(char *str, int fd)
 {
-	fd_list *newlist;
+	t_fd_list *newlist;
 
-	newlist = (fd_list *)malloc(sizeof(fd_list));
+	newlist = (t_fd_list *)malloc(sizeof(t_fd_list));
 	if (newlist == NULL)
 		return (NULL);
 	if (str == NULL)
@@ -59,9 +59,9 @@ static fd_list	*lst_create(char *str, int fd)
 	return (newlist);
 }
 
-static fd_list	*lst_search_create(fd_list *fd_open, int fd)
+static t_fd_list	*lst_search_create(t_fd_list *fd_open, int fd)
 {
-	fd_list *cursor;
+	t_fd_list *cursor;
 
 	cursor = fd_open;
 	while (cursor->next != NULL)
@@ -78,11 +78,11 @@ static fd_list	*lst_search_create(fd_list *fd_open, int fd)
 	return (cursor);
 }
 
-int				get_next_line_list(const int fd, char **line)
+int					get_next_line_list(const int fd, char **line)
 {
-	static fd_list	*fd_open;
-	fd_list			*fd_tmp;
-	char			*str;
+	static t_fd_list	*fd_open;
+	t_fd_list			*fd_tmp;
+	char				*str;
 
 	if (fd < 0 || line == NULL || BUFF_SIZE < 1)
 		return (-1);

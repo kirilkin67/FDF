@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 18:04:49 by wrhett            #+#    #+#             */
-/*   Updated: 2020/06/26 11:51:07 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/08/07 11:57:48 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,14 @@ void		ft_point_drawing(t_fdf *p)
 		ft_point_coordinates(p, &dot1, n % p->width, n / p->width);
 		if (n % p->width < (p->width - 1))
 		{
-			ft_point_coordinates(p, &dot2, (n + 1) % p->width, (n + 1) / p->width);
+			ft_point_coordinates(p, &dot2, (n + 1) % p->width,
+			(n + 1) / p->width);
 			ft_drawing_line_dot(p, &dot1, &dot2);
 		}
 		if (n / p->width < (p->hight - 1))
 		{
-			ft_point_coordinates(p, &dot2, (n + p->width) % p->width, (n + p->width) / p->width);
+			ft_point_coordinates(p, &dot2, (n + p->width) % p->width,
+			(n + p->width) / p->width);
 			ft_drawing_line_dot(p, &dot1, &dot2);
 		}
 		n += 1;
@@ -110,6 +112,6 @@ void		ft_drawing_iso_obl(t_fdf *p)
 {
 	ft_bzero(p->draw, WIDHT * HIGHT * 4);
 	ft_point_drawing(p);
-	ft_point_drawing_betta(p);
+	// ft_point_drawing_betta(p);
 	expose_hook(p);
 }

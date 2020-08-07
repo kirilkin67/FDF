@@ -6,7 +6,7 @@
 #    By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/08 15:16:11 by wrhett            #+#    #+#              #
-#    Updated: 2020/05/31 18:27:16 by wrhett           ###   ########.fr        #
+#    Updated: 2020/08/07 12:03:32 by wrhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,7 +86,8 @@ FLAGS = -Wall -Wextra -Werror
 all:	$(NAME)
 
 $(OBJECTS): %.o: %.c $(HEADER_F)
-		gcc $(FLAGS) -o $@ -c $<
+		@gcc $(FLAGS) -o $@ -c $<
+		@echo "\033[32m⏩\033[0m\c"
 
 $(NAME): $(OBJECTS)
 		@ar rc $@ $^

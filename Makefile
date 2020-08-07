@@ -6,7 +6,7 @@
 #    By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/12 17:31:15 by wrhett            #+#    #+#              #
-#    Updated: 2020/06/24 16:30:39 by wrhett           ###   ########.fr        #
+#    Updated: 2020/08/07 12:02:00 by wrhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,14 +50,15 @@ all: $(NAME)
 $(NAME): $(LIBFT) $(OBJECTS_DIR) $(OBJECTS)
 		@$(CC) $(FLAGS) -o $(NAME) $(OBJECTS) -I $(HEADER_DIR) \
 		-L $(LIBFT_DIR) -lft $(MLX)
-		@echo "\033[32m$(NAME): was created\033[0m"
+		@echo "✅\n\033[34m$(NAME):\033[32m was created\033[0m"
 
 $(OBJECTS_DIR):
 		@mkdir -p $(OBJECTS_DIR)
-		@echo "\033[32m$(NAME): $(OBJECTS_DIR)directory was created\033[0m"
+		@echo "✅\033[34m$(NAME):\033[32m $(OBJECTS_DIR)directory was created\033[0m"
 
 $(OBJECTS_DIR)%.o: $(SRC_DIR)%.c $(HEADER)
 		@$(CC) $(FLAGS) $(INCLUDES) -o $@ -c $<
+		@echo "✅\c"
 
 $(LIBFT): FAKE
 		@$(MAKE) -C $(LIBFT_DIR)
